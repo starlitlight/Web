@@ -1,0 +1,89 @@
+.container {
+    margin: 0px;
+    padding: 0px;
+}
+
+.nav-side-menu {
+    list-style: none;
+    margin-top: 0px;
+    margin-left: 69px;
+    overflow: auto;
+    font-family: "平方", "微软雅黑", "宋体";
+    font-weight: normal;
+    background-color: #404041;
+    position: fixed;
+    padding: 0px;
+    width: 252.5px;
+    height: 80%;
+}
+
+i.pull-left.fa.fa-sort-desc {
+    color: #404041;
+}
+
+i.pull-left.fa.fa-sort-desc:hover {
+    color: #f2b136;
+}
+
+i.fa.fa-times{
+	color: #404041;
+}
+
+i.fa.fa-times:hover{
+	color: #f2b136;
+}
+
+.menu-first {
+    height: 45px;
+    line-height: 45px;
+    border: 0px;
+    padding: 0;
+    color: azure;
+    font-size: 16px;
+    font-weight: normal;
+    text-align: left;
+    text-decoration: none;
+}
+
+.menu-first:hover {
+    text-decoration: none;
+    color: #f2b136;
+}
+
+.menu-first:link {
+    text-decoration: none;
+}
+
+.menu-second li {
+    list-style: none;
+}
+
+.menu-second li a:hover{
+    color: #f2b136;
+}
+
+.menu-second li a {
+    text-decoration: none;
+    list-style: none;
+    background: #404041;
+    height: 31px;
+    line-height: 31px;
+    font-size: 14px;
+    text-align: center;
+    color: azure;
+}
+
+.menu-third li a {
+    list-style-type: none;
+    background: #404041;
+    height: 31px;
+    line-height: 31px;
+    font-size: 12px;
+    text-align: center;
+    font-family: "平方", "微软雅黑", "宋体";
+}
+
+.nav-list li a {
+    padding: 0px;
+    margin: 0px;
+}

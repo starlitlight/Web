@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>iFilmo</display-name>
+
+	<welcome-file-list>
+		<welcome-file>/UI/main.jsp</welcome-file>
+	</welcome-file-list>
+<!-- 
+	<filter>
+		<filter-name>encoding</filter-name>
+		<filter-class>Fileter.encoding</filter-class>
+		<init-param>
+			<param-name>charset</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+ -->
+ 	<servlet>
+		<display-name>显示主页面</display-name>
+		<servlet-name>MainServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.MainServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MainServlet</servlet-name>
+		<url-pattern>/MainServlet</url-pattern>
+	</servlet-mapping>
+ 
+	<servlet>
+		<display-name>用户登录</display-name>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.LoginServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/LoginServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>用户登出</display-name>
+		<servlet-name>LogoutServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.LogoutServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>LogoutServlet</servlet-name>
+		<url-pattern>/LogoutServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>Show user Account</display-name>
+		<servlet-name>UserAccountServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.UserAccountServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>UserAccountServlet</servlet-name>
+		<url-pattern>/UserAccountServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>更新用户账户</display-name>
+		<servlet-name>UpdateUserServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.UpdateUserServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>UpdateUserServlet</servlet-name>
+		<url-pattern>/UpdateUserServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>添加用户</display-name>
+		<servlet-name>AddUserServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.AddUserServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AddUserServlet</servlet-name>
+		<url-pattern>/AddUserServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>删除用户</display-name>
+		<servlet-name>DeleteUserServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.DeleteUserServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DeleteUserServlet</servlet-name>
+		<url-pattern>/DeleteUserServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>修改密码</display-name>
+		<servlet-name>ChangePasswordServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.ChangePasswordServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ChangePasswordServlet</servlet-name>
+		<url-pattern>/ChangePasswordServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>查看所有用户</display-name>
+		<servlet-name>FindAllUserServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.FindAllUserServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>FindAllUserServlet</servlet-name>
+		<url-pattern>/FindAllUserServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>搜索指定用户</display-name>
+		<servlet-name>SearchUserServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.SearchUserServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SearchUserServlet</servlet-name>
+		<url-pattern>/SearchUserServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>通过角色查找用户</display-name>
+		<servlet-name>FindUserByRoleServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.FindUserByRoleServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>FindUserByRoleServlet</servlet-name>
+		<url-pattern>/FindUserByRoleServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>修改用户权限</display-name>
+		<servlet-name>UpdateRoleByUserIdServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.UpdateRoleByUserIdServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>UpdateRoleByUserIdServlet</servlet-name>
+		<url-pattern>/UpdateRoleByUserIdServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>查看第一级目录</display-name>
+		<servlet-name>FindFirst_catalogueServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.catalogue.FindFirst_catalogueServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>FindFirst_catalogueServlet</servlet-name>
+		<url-pattern>/FindFirst_catalogueServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>图片保存</display-name>
+		<servlet-name>FileUploadServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.FileUploadServlet</servlet-class>
+		<!-- 
+		<init-param>
+			<param-name>savePath</param-name>
+			<param-value>bootstrap\images</param-value>
+	</init-param>
+	 -->
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>FileUploadServlet</servlet-name>
+		<url-pattern>/FileUploadServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>二级菜单</display-name>
+		<servlet-name>SelectServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.catalogue.SelectServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SelectServlet</servlet-name>
+		<url-pattern>/SelectServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>添加新课程</display-name>
+		<servlet-name>addCourseServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.catalogue.addCourseServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>addCourseServlet</servlet-name>
+		<url-pattern>/addCourseServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>查看新课程内容</display-name>
+		<servlet-name>showCourseContentServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.showCourseContentServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>showCourseContentServlet</servlet-name>
+		<url-pattern>/showCourseContentServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>查看课程内容</display-name>
+		<servlet-name>ShowCourseServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.catalogue.ShowCourseServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ShowCourseServlet</servlet-name>
+		<url-pattern>/ShowCourseServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>跳转添加新课程页面</display-name>
+		<servlet-name>showAddCourseServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.catalogue.showAddCourseServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>showAddCourseServlet</servlet-name>
+		<url-pattern>/showAddCourseServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>邮箱找回密码</display-name>
+		<servlet-name>EmailServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.EmailServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>EmailServlet</servlet-name>
+		<url-pattern>/EmailServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>邮件重设密码</display-name>
+		<servlet-name>ResetPasswordServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.ResetPasswordServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ResetPasswordServlet</servlet-name>
+		<url-pattern>/ResetPasswordServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>重设密码</display-name>
+		<servlet-name>PasswordServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.PasswordServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PasswordServlet</servlet-name>
+		<url-pattern>/PasswordServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>删除三级目录</display-name>
+		<servlet-name>DeleteThird_catalogueServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.catalogue.DeleteThird_catalogueServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteThird_catalogueServlet</servlet-name>
+		<url-pattern>/DeleteThird_catalogueServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>删除二级目录</display-name>
+		<servlet-name>DeleteSecond_catalogueServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.catalogue.DeleteSecond_catalogueServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteSecond_catalogueServlet</servlet-name>
+		<url-pattern>/DeleteSecond_catalogueServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>删除一级目录</display-name>
+		<servlet-name>DeleteFirst_catalogueServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.catalogue.DeleteFirst_catalogueServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteFirst_catalogueServlet</servlet-name>
+		<url-pattern>/DeleteFirst_catalogueServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>搜索</display-name>
+		<servlet-name>searchCourseServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.searchCourseServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>searchCourseServlet</servlet-name>
+		<url-pattern>/searchCourseServlet</url-pattern>
+	</servlet-mapping>
+	
+</web-app>

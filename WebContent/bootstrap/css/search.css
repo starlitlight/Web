@@ -1,0 +1,50 @@
+div.col-md-12{
+    
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 0px;
+    text-decoration-color: #989793;
+    padding: 0px;
+}
+
+img.pull-left{
+    width: 125px;
+    height: 125px;
+}
+
+h3.head{
+    text-align: center;
+    margin: 0px;
+    font-family: "平方", "微软雅黑", "宋体";
+}
+
+div.caption{
+    height: 100px;
+}
+
+a.btn.btn-warning{
+    width: 125px;
+    height: 25px;
+    font-family: inherit;
+    font-size: 14px;
+    text-align: center;
+    line-height: 12px;
+}
+
+div.thumbnail.clearfix{
+	padding:0px;
+	margin: 0px;
+}
+
+.search_result{
+	margin-top:20px;
+	font-family: "平方", "微软雅黑", "宋体";
+	font-size: 18px;
+}
+
+span.content{
+	display:block;
+	height: 60px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

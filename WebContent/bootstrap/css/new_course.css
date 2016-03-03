@@ -1,0 +1,26 @@
+.newCourse {
+    background-color:#faf9f8;
+    width: 900px;
+}
+
+input#courseName.form-control{
+    width: 200px;
+}
+
+select#selectCourse1.form-control{
+    width: 200px;
+    font-family: "平方", "微软雅黑", "宋体";
+}
+
+select#selectCourse2.form-control{
+    width: 200px;
+    font-family: "平方", "微软雅黑", "宋体";
+}
+
+div#addNewCourse.form-group{
+    margin-top: 200px;
+}
+
+button.btn.btn-primary.btn-lg{
+	width: 70px;
+}

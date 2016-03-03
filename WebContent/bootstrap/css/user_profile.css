@@ -1,0 +1,23 @@
+.user-info{
+    margin-top: 20px;
+    background-color: yellow;
+}
+
+
+.form-horizontal{
+    font-family: "平方", "微软雅黑", "宋体";
+}
+
+input.sex{
+    margin-top: 10px;
+}
+
+.tishi{
+	color:red; 
+	visibility:hidden;
+}
+
+img.avatar.img-circle.img-thumbnail{
+	height:200px;
+	width:200px;
+}
