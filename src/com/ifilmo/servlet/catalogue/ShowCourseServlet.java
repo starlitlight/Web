@@ -23,6 +23,7 @@ public class ShowCourseServlet extends HttpServlet{
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int t_id = Integer.parseInt(request.getParameter("t_id"));
+		int role = Integer.parseInt(request.getParameter("role"));
 		CatalogueDAO  cataloguedao = new CatalogueDAOImpl();
 		Third_catalogue third_catalogue = cataloguedao.findContentyById(t_id);
 		if(third_catalogue!=null){
@@ -30,7 +31,12 @@ public class ShowCourseServlet extends HttpServlet{
 		}else{
 			System.out.println("读取课程内容失败");
 		}
-		request.getRequestDispatcher("/UI/showCourse.jsp").forward(request, response);
+		if(role==1){
+			request.getRequestDispatcher("/UI/showCourse.jsp").forward(request, response);
+		}else{
+			request.getRequestDispatcher("/UI/addCourseContent.jsp").forward(request, response);
+		}
+		
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -43,22 +43,8 @@ public class addCourseServlet extends HttpServlet {
 			}else{
 				System.out.println("第二级目录保存成功");
 			}
-		}else {
-			if(cataloguedao.insertThird_catalogue(courseName, content, selectCourse2)){
-				Third_catalogue third_catalogue = cataloguedao.findThird_catalogueByName(courseName);
-				if(third_catalogue!=null){
-					int t_id = third_catalogue.getT_id();
-					List<String> imgs = getImageSrc.getImageSrc(content);
-					for(String img: imgs){
-						Picture picture = new Picture(img, t_id);
-						if(cataloguedao.insertPictures(picture)){
-							msg = "SUCCESSFUL";
-						}
-					}
-				}else{
-					System.out.println("找不到三级目录类");
-				}
-				
+		}else if(selectCourse2!=0 && selectCourse1!=0){
+			if(cataloguedao.insertThird_catalogue(courseName, selectCourse2)){
 				request.getRequestDispatcher("/showAddCourseServlet").forward(request, response);
 			}else{
 				System.out.println("第三级目录保存成功");

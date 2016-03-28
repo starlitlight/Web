@@ -1,12 +1,17 @@
-.user-info{
-    margin-top: 20px;
-    background-color: yellow;
+input.btn.btn-warning{
+	width: 	80px;
+	height: 30px;
+	border-radius: 20px;
+	padding: 0px;
 }
 
-
-.form-horizontal{
-    font-family: "平方", "微软雅黑", "宋体";
+.user_info{
+	
+	border: 1px solid #fff;
+	border-radius: 5px;
+	background-color: #fff;
 }
+
 
 input.sex{
     margin-top: 10px;
@@ -18,6 +23,20 @@ input.sex{
 }
 
 img.avatar.img-circle.img-thumbnail{
-	height:200px;
-	width:200px;
+	height:150px;
+	width:150px;
+	border: 0px;
+}
+
+.password{
+	color: #f2b136;
+}
+
+.choosePhoto{
+	color: #f2b136;
+}
+
+.uploadFileFont{
+	 font-family: "平方", "微软雅黑", "宋体";
+	 font-size: 12px;
 }

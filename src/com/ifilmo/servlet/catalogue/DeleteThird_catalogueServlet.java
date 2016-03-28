@@ -30,7 +30,7 @@ public class DeleteThird_catalogueServlet extends HttpServlet{
 		}else{
 			System.out.println("删除第三级目录失败");
 		}
-		request.getRequestDispatcher("UI/main.jsp").forward(request, response);
+		request.getRequestDispatcher("/showAddCourseServlet").forward(request, response);
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)

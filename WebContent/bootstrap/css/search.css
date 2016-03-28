@@ -1,15 +1,6 @@
-div.col-md-12{
-    
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-bottom: 0px;
-    text-decoration-color: #989793;
-    padding: 0px;
-}
-
 img.pull-left{
-    width: 125px;
-    height: 125px;
+    width: 219.656px;
+    height: 137px;
 }
 
 h3.head{
@@ -29,6 +20,7 @@ a.btn.btn-warning{
     font-size: 14px;
     text-align: center;
     line-height: 12px;
+    margin-right: 5px;
 }
 
 div.thumbnail.clearfix{

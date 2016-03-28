@@ -187,11 +187,10 @@ public class CatalogueDAOImpl implements CatalogueDAO {
 		return (rows == 1);
 	}
 	
-	public boolean insertPictures(Picture picture) {
-		String sql = "INSERT INTO picture(path, t_id) " + "VALUES"
-				+ "(?,?)";
-		Object[] values = new Object[] { picture.getPath(), picture.getT_id()};
-		//System.out.println("Role = " + user.getRole());
+	public boolean insertThird_catalogue(String courseName, int s_id) {
+		String sql = "INSERT INTO third_catalogue(t_name, t_content, s_id)" + "VALUES"
+				+ "(?,?,?)";
+		Object[] values = new Object[] {courseName, null, s_id};
 		int rows = 0;
 		try {
 			rows = jdbctemplate.update(sql, values);
@@ -202,6 +201,20 @@ public class CatalogueDAOImpl implements CatalogueDAO {
 			e.printStackTrace();
 		}
 		return (rows == 1);
+	}
+	
+	public boolean updatePictures(String path, int t_id) {
+		
+		String sql = "UPDATE picture SET path = " + "'" + path + "'" + " WHERE t_id = " + t_id;
+		try {
+			return (jdbctemplate.update(sql)==1);
+		} catch (ClassNotFoundException e) {
+			System.out.println("NO DRIVER");
+		} catch (SQLException e) {
+			System.out.println("NO CONNECTION");
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public Third_catalogue findThird_catalogueByName(String courseName) {
@@ -237,6 +250,20 @@ public class CatalogueDAOImpl implements CatalogueDAO {
 			e.printStackTrace();
 		}
 		return picture;
+	}
+	
+	public boolean UpdateCourseContentById(String content, int t_id) {
+		//User user = null;
+		String sql = "UPDATE third_catalogue SET t_content = " + "'" + content + "'" + " WHERE t_id = " + t_id;
+		try {
+			return (jdbctemplate.update(sql)==1);
+		} catch (ClassNotFoundException e) {
+			System.out.println("NO DRIVER");
+		} catch (SQLException e) {
+			System.out.println("NO CONNECTION");
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 }

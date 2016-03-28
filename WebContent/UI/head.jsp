@@ -47,22 +47,17 @@
 
 <!-- BEGIN BODY -->
 <body>
+<%
+	User user = (User)session.getAttribute("user");
+
+%>
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="row">
 			<div class="col-md-3">
-				<a href="MainServlet"><img class="logo" src="<%=request.getContextPath() %>/bootstrap/images/logo.png" /></a>
+				<a href="MainServlet"><img class="logo" src="<%=request.getContextPath() %>/bootstrap/images/logo_ifilmo.png" /></a>
 			</div>
 			<div class="col-md-6">
 				<ul class="nav navbar-nav">
-				<!-- 
-	                <form class="navbar-form navbar-left" role="search">
-	                    <select name="dropdown" size="1" class="all-courses">
-	                        <option>全部课程</option>
-	                        <option>图片</option>
-	                        <option>视频</option>
-	                    </select>
-	                </form>
-	                 -->
 	                 <li><a class="login-font">全部课程</a></li>
                 </ul>
 				<ul class="nav navbar-nav">
@@ -70,7 +65,7 @@
 	                    <div class="form-group">
 	                        <input type="text" name="keyword" style="width:300px" class="form-control" placeholder="搜索你感兴趣的课程">
 	                        <a href="javascript:void(document.search.submit())" class="navbar-link">
-	                        	<span class="fa fa-search" aria-hidden="true"></span>
+	                        	<span class="fa fa-search fa-lg" aria-hidden="true"></span>
 	                        </a>
 	                    </div>
 	                </form>
@@ -78,34 +73,37 @@
 			</div>
 			<div class="col-md-3">
 				<ul class="nav navbar-nav">
-					<li><span class="fa fa-user" aria-hidden="true"></span></li>
 <% 
-						User user = (User)session.getAttribute("user");
 						if(user==null){
 %>
+					<li><span class="fa fa-user" aria-hidden="true"></span></li>
 					<li><a class="login-font" data-toggle="modal">登陆</a></li>
 <% 
 						//普通用户
 						}else if(user.getRole()==1){
-%>					
-					<li class="dropdown user">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class=login-font><%=user.getUser_name() %></span>
-							<i class="fa fa-sort-desc"></i>
-						</a>
-						<ul class="dropdown-menu">
-							<li><a href="UserAccountServlet?user_id=<%=user.getUser_id() %>" class="dropdown-list"><i class="fa fa-info"></i>
+%>
+						<li><span class="fa fa-user" aria-hidden="true"></span></li>
+						<li class="dropdown user">
+							<a href="#" class="dropdown-toggle"
+								data-toggle="dropdown"> <span class="login-font"><%=user.getUser_name() %></span>
+								<i class="fa fa-sort-desc"></i>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="UserAccountServlet?user_id=<%=user.getUser_id() %>" class="dropdown-list"><i class="fa fa-info"></i>
 									账户设置</a></li>
-							<li><a href="LogoutServlet" class="dropdown-list"><i class="fa fa-sign-out"></i> 退出登录</a></li>
-						</ul>
-					</li>
+								<li><a href="LogoutServlet" class="dropdown-list"><i class="fa fa-sign-out"></i> 退出登录</a></li>
+							</ul>
+						</li>
 <%
 						//管理员用户
 						}else if(user.getRole()==2){
 %>
+					<li><a href="showAddCourseServlet" style="color:red; font-size:16px;">添加课程</a></li>
+					<li><span class="fa fa-user" aria-hidden="true"></span></li>
 					<li class="dropdown user"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> <span class="login-font"><%=user.getUser_name() %></span>
 							<i class="fa fa-sort-desc"></i>
-					</a>
+						</a>
 						<ul class="dropdown-menu">
 							<li><a href="UserAccountServlet?user_id=<%=user.getUser_id() %>"><i class="fa fa-info"></i>
 									账户设置</a></li>
@@ -113,17 +111,19 @@
 										class="fa fa-user-plus"></i> 添加新用户</a></li>
 							<li><a href="FindAllUserServlet"><i class="fa fa-users"></i>
 									查看用户信息</a></li>
-							<li><a href="showAddCourseServlet"><i class="fa fa-plus"></i>
-									添加新课程</a></li>
 							<li><a href="LogoutServlet"><i class="fa fa-sign-out"></i>退出登录</a></li>
-						</ul></li>
+						</ul>
+					</li>
 <% 
+						//超级管理员
 						}else if(user.getRole()==3){
 %>
+					<li><a href="showAddCourseServlet" style="color:red; font-size:16px;">添加课程</a></li>
+					<li><span class="fa fa-user" aria-hidden="true"></span></li>
 					<li class="dropdown user"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> <span class="username"><%=user.getUser_name() %></span>
 							<i class="fa fa-sort-desc"></i>
-					</a>
+						</a>
 						<ul class="dropdown-menu">
 							<li><a href="UserAccountServlet?user_id=<%=user.getUser_id() %>"><i class="fa fa-info"></i>
 									账户设置</a></li>
@@ -132,7 +132,8 @@
 							<li><a href="FindAllUserServlet"><i class="fa fa-users"></i>
 									查看用户群组</a></li>
 							<li><a href="LogoutServlet"><i class="fa fa-sign-out"></i>退出登录</a></li>
-						</ul></li>
+						</ul>
+					</li>
 <% 
 						}
 %>
@@ -141,6 +142,7 @@
 		</div>
 	</nav>
 </body>
+
 <!-- 模态框 用户登录 -->
 <div class="modal fade" id="userLogin" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"

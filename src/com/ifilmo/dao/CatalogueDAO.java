@@ -34,8 +34,14 @@ public interface CatalogueDAO {
     
     public List<Third_catalogue> searchThird_catalogueBykeyword(String keyword);
     
-    public boolean insertPictures(Picture picture);
+    //public boolean insertPictures(Picture picture);
+    
+    public boolean updatePictures(String path, int t_id);
     
     public List<Picture> findPictureByTid(int t_id);
+    
+    public boolean insertThird_catalogue(String courseName, int s_id);
+    
+    public boolean UpdateCourseContentById(String content, int t_id);
 
 }

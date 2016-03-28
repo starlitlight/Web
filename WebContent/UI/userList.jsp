@@ -26,13 +26,61 @@
 
 <div class="row" style="margin-top: 20px;">
 	<div class="col-md-3">
-			<div class="nav-side-menu">
+				<div class="nav-side-menu">
 <%
+						User user_catalogue = (User)session.getAttribute("user");
 	                    CatalogueDAO cataloguedao = new CatalogueDAOImpl();
 						List<First_catalogue> first_catalogues = cataloguedao.findFirst_catalogue();
+						//超级管理员身份
+						if(user.getRole()==3){
 						if(first_catalogues!=null){
 							for(First_catalogue first_catalogue : first_catalogues){
 %>
+				<li>
+					<a href="#<%=first_catalogue.getF_name()%>" class="menu-first" data-toggle="collapse"><%=first_catalogue.getF_name() %>
+						<i class="pull-left fa fa-sort-desc"></i>
+						<a href="DeleteFirst_catalogueServlet?course_name=<%=first_catalogue.getF_name() %>" onclick="return delete_confirm()">
+							<i  class="fa fa-times"></i></a>
+					</a>
+				</li>
+						<ul id="<%=first_catalogue.getF_name()%>" class="collapse menu-second">
+<% 
+	                       	int f_id = first_catalogue.getF_id();
+	   						List<Second_catalogue> second_catalogues = cataloguedao.findSecond_catalogueByf_id(f_id);
+	   						for(Second_catalogue second_catalogue : second_catalogues){
+%>
+							<li>
+								<a href="#<%=second_catalogue.getS_name() %>" data-toggle="collapse"><%=second_catalogue.getS_name() %></a>
+								<a href="DeleteSecond_catalogueServlet?course_name=<%=second_catalogue.getS_name() %>" onclick="return delete_confirm()">
+								<i class="fa fa-times"></i></a>
+							</li>
+								<ul id="<%=second_catalogue.getS_name() %>" class="collapse menu-third">
+								<% 
+									List<Third_catalogue> third_catalogues = cataloguedao.findThird_catalogueBys_id(second_catalogue.getS_id());
+									for(Third_catalogue third_catalogue : third_catalogues){
+								%>
+									<li>
+										<a href="ShowCourseServlet?t_id=<%=third_catalogue.getT_id() %>&&role=<%=user.getRole()%>"><%=third_catalogue.getT_name() %></a>
+										<a href="DeleteThird_catalogueServlet?course_name=<%=third_catalogue.getT_name() %>" onclick="return delete_confirm()">
+											<i class="fa fa-times"></i>
+										</a>
+									</li>
+<%
+									} 
+%>
+                                </ul> 
+<%								
+	   						}
+%>
+                        </ul>
+<%
+							} 
+    					}
+						//管理员和普通用户身份
+						}else{
+							if(first_catalogues!=null){
+								for(First_catalogue first_catalogue : first_catalogues){
+%>							
 				<li>
 					<a href="#<%=first_catalogue.getF_name()%>" class="menu-first" data-toggle="collapse"><%=first_catalogue.getF_name() %>
 						<i class="pull-left fa fa-sort-desc"></i>
@@ -52,20 +100,22 @@
 									List<Third_catalogue> third_catalogues = cataloguedao.findThird_catalogueBys_id(second_catalogue.getS_id());
 									for(Third_catalogue third_catalogue : third_catalogues){
 								%>
-									<li><a href="ShowCourseServlet?t_id=<%=third_catalogue.getT_id() %>">
-									<%=third_catalogue.getT_name() %></a></li>
+									<li><a href="ShowCourseServlet?t_id=<%=third_catalogue.getT_id() %>&&role=<%=user.getRole()%>">
+											<%=third_catalogue.getT_name() %>
+										</a>
+									</li>
 <%
 									} 
 %>
                                 </ul> 
-							
 <%								
 	   						}
 %>
                         </ul>
-<%
-							} 
-    					}
+<%							
+						}
+							}
+						}
 %>
                     </div>
 		</div>
@@ -198,14 +248,14 @@
 		$('#power').modal('show');
 	}
 	
-	function show_confirm(){
-		var r=confirm("确认要删除用户吗？");
-		if(r==true){
-			return true;
-		}else{
-			return false;
-		}
-	}
+	function show_confirm() {
+	    var msg = "您确定要删除该用户吗？\n\n请确认！";
+	    if (confirm(msg)==true){
+	      return true;
+	    }else{
+	      return false;
+	    }
+	  }
 	
 	var pageSize = 11; //每页显示的记录条数
 	var curPage = 0; //当前页

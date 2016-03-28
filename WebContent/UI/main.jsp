@@ -14,6 +14,7 @@
 <head>
 <title>爱影</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="<%=request.getContextPath() %>/bootstrap/css/login.css" rel="stylesheet">
 </head>
 <!-- END HEAD -->
 
@@ -53,7 +54,6 @@
 									} 
 %>
                                 </ul> 
-							
 <%								
 	   						}
 %>
@@ -63,39 +63,22 @@
     					}
 %>
                     </div>
-		</div>
-		<div class="col-md-8">
-		
-				<div class="modal-dialog">
-					<div class="modal-content">
-					
-						<div class="modal-header">
-							<img class="login-logo" src="bootstrap/images/logoOrange.png" />
-							<h2 class="login-heading">欢迎来到爱影培训平台!</h2>
-						</div>
-						<div class="modal-body">
-						<form class="form-signin" action="LoginServlet" method="post" id="login">
-								<input class="input-style" type="text" class="form-control"
-									name="user_name" placeholder="用户名" required="" autofocus="" />
-								<input class="input-style" type="password" class="form-control"
-									name="user_password" placeholder="密码" required="" />
-								<div>
-									<p class="forgotPass">
-										<a data-toggle="modal" data-target="#findPassword"
-											class="fontsize">忘记密码</a>
-									</p>
-								</div>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
-						</div>
-						</form>
-					</div>
-				</div>
 			</div>
-
+			<div class="col-md-8">
+				<section class="login-form">
+				<form method="post" action="LoginServlet" role="login">
+					<img class="login-logo" style="margin-left: 130px" src="bootstrap/images/logoOrange.png" />
+					<p class="login-heading">欢迎来到爱影培训平台</p>
+					<input type="text" name="user_name" placeholder="用户名" oninvalid="this.setCustomValidity('请输入用户名')"
+						required="" class="form-control input-lg" autofocus="" /> 
+					<input type="password" name="user_password" placeholder="密码" oninvalid="this.setCustomValidity('请输入密码')"
+						required="" class="form-control input-lg" /> 
+					<a data-toggle="modal" data-target="#findPassword" class="primary" style="font-size: 14px">忘记密码</a>
+					<button type="submit" class="btn btn-lg btn-block btn-primary">登陆</button>
+				</form>
+				</section>
+			</div>
 		</div>
-	</div>
 </body>
 <!-- END BODY -->
 

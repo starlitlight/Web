@@ -31,7 +31,7 @@ public class ChangePasswordServlet extends HttpServlet{
 		if(userdao.UpdatePasswordByUserId(encrypt_password2, user_id)){
             request.getRequestDispatcher("/UserAccountServlet?user_id").forward(request, response);
         }else{
-            request.setAttribute("message", "ĞŞ¸ÄÃÜÂë´íÎó");  
+            request.setAttribute("message", "");  
             request.getRequestDispatcher("/UI/main.jsp").forward(request, response);  
         }
 	}

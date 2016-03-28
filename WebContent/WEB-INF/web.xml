@@ -182,6 +182,18 @@
 		<url-pattern>/FileUploadServlet</url-pattern>
 	</servlet-mapping>
 	
+	
+	<servlet>
+		<display-name>保存上传图片</display-name>
+		<servlet-name>SavePictureServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.catalogue.SavePictureServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SavePictureServlet</servlet-name>
+		<url-pattern>/SavePictureServlet</url-pattern>
+	</servlet-mapping>
+	
 	<servlet>
 		<display-name>二级菜单</display-name>
 		<servlet-name>SelectServlet</servlet-name>
@@ -205,6 +217,17 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<display-name>添加新课程内容</display-name>
+		<servlet-name>addCourseContentServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.catalogue.addCourseContentServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>addCourseContentServlet</servlet-name>
+		<url-pattern>/addCourseContentServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<display-name>查看新课程内容</display-name>
 		<servlet-name>showCourseContentServlet</servlet-name>
 		<servlet-class>com.ifilmo.servlet.showCourseContentServlet</servlet-class>
@@ -214,6 +237,18 @@
 		<servlet-name>showCourseContentServlet</servlet-name>
 		<url-pattern>/showCourseContentServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<display-name>预览课程内容</display-name>
+		<servlet-name>PreviewCourseServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.catalogue.PreviewCourseServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PreviewCourseServlet</servlet-name>
+		<url-pattern>/PreviewCourseServlet</url-pattern>
+	</servlet-mapping>
+	
 	
 	<servlet>
 		<display-name>查看课程内容</display-name>
