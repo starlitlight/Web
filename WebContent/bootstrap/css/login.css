@@ -1,0 +1,30 @@
+
+.login-form {
+	margin: 10px auto;
+	max-width: 400px;
+}
+
+form[role=login] {
+	font: 16px/1.8em Lato, serif;
+	background: inherit;
+	padding: 30px 26px;
+	color: inherit;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+	form[role=login] > img {
+		display: block;
+		margin-bottom: 2em;
+	}
+	form[role=login] .form-control,
+	form[role=login] button {
+		font-size: 18px;
+		margin: 16px 0;
+	}
+		
+.form-links {
+	text-align: center;
+	margin-top: 2em;
+	margin-bottom: 50px;
+}
