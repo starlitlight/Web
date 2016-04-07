@@ -20,16 +20,16 @@ public class SelectServlet extends HttpServlet {
 		response.setHeader("Cache-Control", "no-cache");
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		int targetId = Integer.parseInt(request.getParameter("id")); // 获得武侠大师编号
+		int targetId = Integer.parseInt(request.getParameter("id")); 
 
 		CatalogueDAO cataloguedao = new CatalogueDAOImpl();
 		List<Second_catalogue> second_catalogues = cataloguedao.findSecond_catalogueByf_id(targetId);
 
-		System.out.println(targetId);
 		String xml_start = "<selects>";
 		String xml_end = "</selects>";
 		String xml = "";
 		if (targetId == 0) {
+			xml = "<select><value>0</value><text>请选择目录</text></select>";
 		} else {
 			xml = "<select><value>0</value><text>请选择目录</text></select>";
 			for (Second_catalogue second_catalogue : second_catalogues) {

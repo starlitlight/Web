@@ -16,13 +16,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="bootstrap/css/new_course.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link href="<%=request.getContextPath() %>/bootstrap/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/froala_editor.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/froala_style.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/char_counter.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/code_view.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/image.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/colors.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/file.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/fullscreen.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/image.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/image_manager.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/line_breaker.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/quick_insert.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/table.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/video.css">
+
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
 </head>
 <!-- END HEAD -->
@@ -135,10 +145,12 @@
 		<div class="row" style="padding-top: 20px; padding-left:60px;"> 
 			<form role="form" class="newCourse" action="addCourseContentServlet" method="post">
 				<div class="form-group">
-					<div class="col-md-8"></div>
+					<div class="col-md-9"></div>
                 	<a href="PreviewCourseServlet?t_id=<%=t_id %>" class="btn btn-warning" 
                 		style="background-color:#fff; color:#eea236; padding-top:3px;">预览</a>
+                		<!--  
                 	<button class="btn btn-warning" type="reset" style="background-color:#fff; color:#eea236">取消</button>
+                	-->
 					<button class="btn btn-warning" type="submit">保存</button>
 				</div>
 				<div class="form-group">
@@ -170,6 +182,7 @@
   <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/paragraph_format.min.js"></script>
   <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/colors.min.js"></script>
   <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/table.min.js"></script>
+  <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/fullscreen.min.js"></script>
 
 <script>
   
@@ -183,7 +196,7 @@
   }
     $(function(){
       $('#edit').froalaEditor({
-        toolbarButtons: ['undo', 'redo', '|', 'fontFamily', 'fontSize', 'bold', 'italic', 'underline', 'color', '|', 'formatOL', 'formatUL', 'paragraphFormat', 'indent', 'outdent', 'align', '|', 'insertTable', 'insertImage', 'insertVideo'],
+        toolbarButtons: ['fullscreen','undo', 'redo', '|', 'fontFamily', 'fontSize', 'bold', 'italic', 'underline', 'color', '|', 'formatOL', 'formatUL', 'paragraphFormat', 'indent', 'outdent', 'align', '|', 'insertTable', 'insertImage', 'insertVideo'],
         // Colors list.
         colorsBackground: [
           '#15E67F', '#E3DE8C', '#D8A076', '#D83762', '#76B6D8', 'REMOVE',

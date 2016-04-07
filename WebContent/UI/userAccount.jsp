@@ -5,6 +5,7 @@
 <%@page import="com.ifilmo.domain.Third_catalogue"%>
 <%@page import="com.ifilmo.dao.*"%>
 <%@page import="com.ifilmo.dao.impl.*"%>
+<%@page import="java.io.File"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -130,16 +131,16 @@
 							<hr class="hr_style"></hr>
 						</div>
 						<%
-								String path = request.getContextPath()  + "/bootstrap/images/" + user_info.getPhoto();
-								System.out.println(path);
+								String path = request.getContextPath() + File.separator + "images" + File.separator + user_info.getPhoto();
+								System.out.println("图片路径：" + path);
+								
 							%>
 						<div class="form-group row">
 							<div class="col-md-1"></div>
 							<label class="col-md-2 form-control-label">头像:</label>
 							<div class="col-md-3">
 								<input name="user_id" id="user_id" value="<%=user_info.getUser_id()%>" type="hidden"/>
-								<img src="<%=path %>" onerror="this.src='bootstrap/images/default.png'"
-									class="avatar img-circle img-thumbnail" alt="avatar">
+								<img src="<%=path %>" onerror="showPhoto()" class="avatar img-circle img-thumbnail" alt="">
 								<input name="photo" id="photo" value="<%=user_info.getPhoto() %>" type="hidden"/>
 					        </div>
 					        <div class="col-md-6">
@@ -282,6 +283,12 @@ function checkpwd() {
 		document.changePassword.submit(); 
 		return true;
 	}
+}
+
+function showPhoto(){
+	var img=event.srcElement;
+	img.src="bootstrap/images/default.png";
+	img.onerror=null; //取消它的onerror事件
 }
 </script>
 </html>

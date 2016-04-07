@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/image_manager.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/table.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+<script src="<%=request.getContextPath() %>/bootstrap/js/select.js"></script>
 </head>
 <!-- END HEAD -->
 

@@ -172,7 +172,6 @@ public class UserDAOImpl implements UserDAO {
 	public boolean UpdatePhotoByUserId(String photo, int user_id) {
 		//User user = null;
 		String sql = "UPDATE user SET photo = '" + photo + "' WHERE user_id = " + user_id;
-		System.out.println(sql);
 		try {
 			return (jdbctemplate.update(sql)==1);
 		} catch (ClassNotFoundException e) {

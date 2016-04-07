@@ -5,11 +5,13 @@ import java.util.List;
 
 import com.ifilmo.dao.CatalogueDAO;
 import com.ifilmo.db.JdbcTemplate;
+import com.ifilmo.domain.Catalogue_table;
 import com.ifilmo.domain.First_catalogue;
 import com.ifilmo.domain.Picture;
 import com.ifilmo.domain.Second_catalogue;
 import com.ifilmo.domain.Third_catalogue;
 import com.ifilmo.domain.User;
+import com.ifilmo.mapping.catalogue_tableMapping;
 import com.ifilmo.mapping.first_catalogueMapping;
 import com.ifilmo.mapping.pictureMapping;
 import com.ifilmo.mapping.second_catalogueMapping;
@@ -95,6 +97,21 @@ public class CatalogueDAOImpl implements CatalogueDAO {
 	@Override
 	public List<Second_catalogue> findSecond_catalogueByf_id(int f_id) {
 		String sql = "SELECT * FROM second_catalogue WHERE f_id = " + f_id;
+		List<Second_catalogue> second_catalogue = null;
+		try {
+			second_catalogue = jdbctemplate.query(sql, new second_catalogueMapping());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return second_catalogue;
+	}
+	
+	public List<Second_catalogue> findSecond_catalogueByf_name(String f_name) {
+		String sql = "SELECT * FROM second_catalogue WHERE s_name = " + f_name;
 		List<Second_catalogue> second_catalogue = null;
 		try {
 			second_catalogue = jdbctemplate.query(sql, new second_catalogueMapping());
@@ -265,5 +282,38 @@ public class CatalogueDAOImpl implements CatalogueDAO {
 		}
 		return false;
 	}
+	
+	public boolean updateCatalogue(String content) {
+		
+		String sql = "UPDATE catalogue_table SET content= " + "'" + content+ "'";
+		try {
+			return (jdbctemplate.update(sql)==1);
+		} catch (ClassNotFoundException e) {
+			System.out.println("NO DRIVER");
+		} catch (SQLException e) {
+			System.out.println("NO CONNECTION");
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public Catalogue_table selectCatalogue() {
+			String sql = "SELECT * FROM catalogue_table";
+			Catalogue_table catalogue = null;
+			try {
+				List<Object> entitys = jdbctemplate.query(sql, new catalogue_tableMapping());
+				if(entitys.size()!=0){
+					catalogue = (Catalogue_table) entitys.get(0);
+				}else{
+					System.out.println("找不到目录");
+				}
+			} catch (ClassNotFoundException e) {
+				System.out.println("NO DRIVER");
+			} catch (SQLException e) {
+				System.out.println("NO CONNECTION");
+				e.printStackTrace();
+			}
+			return catalogue;
+		}
 	
 }

@@ -3,7 +3,7 @@
 <%@page import="com.ifilmo.domain.First_catalogue"%>
 <%@page import="com.ifilmo.domain.Second_catalogue"%>
 <%@page import="com.ifilmo.domain.Third_catalogue"%>
-<%@page import="com.ifilmo.dao.*"%>
+<%@page import="com.ifilmo.dao.CatalogueDAO"%>
 <%@page import="com.ifilmo.dao.impl.*"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" 
@@ -15,6 +15,7 @@
 <title>爱影</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="<%=request.getContextPath() %>/bootstrap/css/login.css" rel="stylesheet">
+
 </head>
 <!-- END HEAD -->
 
@@ -26,6 +27,9 @@
 			<div class="nav-side-menu">
 <%
 	                    CatalogueDAO cataloguedao = new CatalogueDAOImpl();
+try{
+	
+
 						List<First_catalogue> first_catalogues = cataloguedao.findFirst_catalogue();
 						if(first_catalogues!=null){
 							for(First_catalogue first_catalogue : first_catalogues){
@@ -61,8 +65,11 @@
 <%
 							} 
     					}
+}catch (Exception e){
+	e.printStackTrace();
+}
 %>
-                    </div>
+			</div>
 			</div>
 			<div class="col-md-8">
 				<section class="login-form">
@@ -81,7 +88,5 @@
 		</div>
 </body>
 <!-- END BODY -->
-
-
 
 </html>

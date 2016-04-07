@@ -14,6 +14,9 @@
 <head>
 <title>爱影</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/froala_editor.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/froala_style.css">
 </head>
 <!-- END HEAD -->
 
@@ -118,7 +121,7 @@
                     </div>
 		</div>
 		
-		<div class="col-md-8">
+		<div class="col-md-8 fr-view">
 			<%
 				Third_catalogue tc = (Third_catalogue)request.getAttribute("third_catalogue");
 			%>

@@ -35,7 +35,7 @@ div.row{
     border-color: #fff;
     opacity: 0.8;
     height: 40px;
-    width: 150px
+    width: 100px
 }
 
 select[size]{
@@ -108,6 +108,11 @@ select[size]{
 }
 .fa-search{
     color: #f2b136;
+}
+
+.fa-lg{
+	font-size: 1.75em;
+	margin-left: 5px;
 }
 
 .login-font {

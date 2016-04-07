@@ -12,14 +12,17 @@
 
 <!-- BEGIN HEAD -->
 <head>
+
 <title>爱影</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" type='image/jpg' href="<%=request.getContextPath() %>/bootstrap/images/logoOrange.png">
 <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/bootstrap/css/font-awesome.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/bootstrap/css/head.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/bootstrap/css/main.css" rel="stylesheet">
 <script src="<%=request.getContextPath() %>/bootstrap/js/jquery.js"></script>
 <script src="<%=request.getContextPath() %>/bootstrap/js/bootstrap.js"></script>
+<script src="<%=request.getContextPath() %>/bootstrap/js/jquery-ui.js"></script>
 </head>
 <!-- END HEAD -->
 

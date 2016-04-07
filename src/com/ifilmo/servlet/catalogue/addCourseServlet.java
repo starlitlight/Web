@@ -23,31 +23,33 @@ public class addCourseServlet extends HttpServlet {
 		
 		response.setCharacterEncoding("utf-8"); 
 		request.setCharacterEncoding("utf-8");
+		
+		
+		
 		String courseName = request.getParameter("courseName");
 		int selectCourse1 = Integer.parseInt(request.getParameter("selectCourse1"));
 		int selectCourse2 = Integer.parseInt(request.getParameter("selectCourse2"));
-		String content = request.getParameter("edit");
-		String msg = "FAILED";
-		CatalogueDAO cataloguedao = new CatalogueDAOImpl();
 		
+		CatalogueDAO cataloguedao = new CatalogueDAOImpl();
 		
 		if(selectCourse1==0 && selectCourse2==0){
 			if(cataloguedao.insertFirst_catalogue(courseName)){
-				request.getRequestDispatcher("/showAddCourseServlet").forward(request, response);
-			}else{
 				System.out.println("第一级目录保存成功");
+			}else{
+				System.out.println("第一级目录保存失败");
 			}
 		}else if(selectCourse2==0 && selectCourse1!=0){
 			if(cataloguedao.insertSecond_catalogue(courseName, selectCourse1)){
-				request.getRequestDispatcher("/showAddCourseServlet").forward(request, response);
-			}else{
 				System.out.println("第二级目录保存成功");
+				//request.getRequestDispatcher("/showAddCourseServlet").forward(request, response);
+			}else{
+				System.out.println("第二级目录保存失败");
 			}
 		}else if(selectCourse2!=0 && selectCourse1!=0){
 			if(cataloguedao.insertThird_catalogue(courseName, selectCourse2)){
-				request.getRequestDispatcher("/showAddCourseServlet").forward(request, response);
-			}else{
 				System.out.println("第三级目录保存成功");
+			}else{
+				System.out.println("第三级目录保存失败");
 			}
 		}
 	}

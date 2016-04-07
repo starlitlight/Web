@@ -38,6 +38,8 @@ public class FileUploadServlet extends HttpServlet {
 
 		response.setCharacterEncoding("utf-8"); 
 		request.setCharacterEncoding("utf-8");
+		
+		System.out.println("我在这");
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		// upload.setSizeMax(-1);//
@@ -54,15 +56,14 @@ public class FileUploadServlet extends HttpServlet {
 					ServletContext sctx = getServletContext();
 					// 获得存放文件的物理路径
 					// upload下的某个文件夹 得到当前在线的用户 找到对应的文件夹
-					String path = sctx.getRealPath("/bootstrap/images");
-					System.out.println(path);
+					String path = sctx.getRealPath("/images");
 					// 获得文件名
 					String fileName = item.getName();
-					System.out.println(fileName);
+					
 					//System.out.println("The type of the file: " + item.getContentType());
 					// 该方法在某些平台(操作系统),会返回路径+文件名
 					fileName = fileName.substring(fileName.lastIndexOf("/") + 1);
-					File file = new File(path + "\\" + fileName);
+					File file = new File(path + File.separator + fileName);
 
 					if (!file.exists()) {
 						item.write(file);

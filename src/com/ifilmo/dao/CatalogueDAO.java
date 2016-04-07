@@ -3,6 +3,7 @@ package com.ifilmo.dao;
 
 import java.util.List;
 
+import com.ifilmo.domain.Catalogue_table;
 import com.ifilmo.domain.First_catalogue;
 import com.ifilmo.domain.Picture;
 import com.ifilmo.domain.Second_catalogue;
@@ -43,5 +44,10 @@ public interface CatalogueDAO {
     public boolean insertThird_catalogue(String courseName, int s_id);
     
     public boolean UpdateCourseContentById(String content, int t_id);
+    
+    public boolean updateCatalogue(String content);
 
+    public Catalogue_table selectCatalogue();
+    
+    public List<Second_catalogue> findSecond_catalogueByf_name(String f_name);
 }
