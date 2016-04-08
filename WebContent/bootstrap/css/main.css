@@ -41,7 +41,9 @@
     font-weight: normal;
     text-align: left;
     color: #f2b136;
+    background-color: #404041;
     text-decoration: none;
+    visibility: hidden;
 }
 
 .menu-first li a{

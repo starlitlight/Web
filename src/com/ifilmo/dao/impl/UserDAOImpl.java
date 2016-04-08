@@ -24,7 +24,7 @@ public class UserDAOImpl implements UserDAO {
 			if(entitys.size()!=0){
 				user = (User) entitys.get(0);
 			}else{
-				System.out.println("��½ʧ��");
+				System.out.println("登陆失败");
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

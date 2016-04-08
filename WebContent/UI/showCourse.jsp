@@ -24,112 +24,50 @@
 <body>
 
 	<%@ include file="/UI/head.jsp"%>
-
+	<input name="userRole" id="userRole" value="<%=user.getRole()%>" type="hidden"/>
 	<div class="row" style="margin-top: 60px;">
 		<div class="col-md-3">
-				<div class="nav-side-menu">
-<%
-						User user_catalogue = (User)session.getAttribute("user");
-	                    CatalogueDAO cataloguedao = new CatalogueDAOImpl();
-						List<First_catalogue> first_catalogues = cataloguedao.findFirst_catalogue();
-						//超级管理员身份
-						if(user.getRole()==3){
-						if(first_catalogues!=null){
-							for(First_catalogue first_catalogue : first_catalogues){
-%>
-				<li>
-					<a href="#<%=first_catalogue.getF_name()%>" class="menu-first" data-toggle="collapse"><%=first_catalogue.getF_name() %>
-						<i class="pull-left fa fa-sort-desc"></i>
-						<a href="DeleteFirst_catalogueServlet?course_name=<%=first_catalogue.getF_name() %>" onclick="return delete_confirm()">
-							<i  class="fa fa-times"></i></a>
-					</a>
-				</li>
-						<ul id="<%=first_catalogue.getF_name()%>" class="collapse menu-second">
+		<div class="nav-side-menu">
 <% 
-	                       	int f_id = first_catalogue.getF_id();
-	   						List<Second_catalogue> second_catalogues = cataloguedao.findSecond_catalogueByf_id(f_id);
-	   						for(Second_catalogue second_catalogue : second_catalogues){
+			CatalogueDAO  cataloguedao = new CatalogueDAOImpl();
+			Catalogue_table catalogue= cataloguedao.selectCatalogue();
+			if(catalogue!=null){
+				String table = catalogue.getContent();
 %>
-							<li>
-								<a href="#<%=second_catalogue.getS_name() %>" data-toggle="collapse"><%=second_catalogue.getS_name() %></a>
-								<a href="DeleteSecond_catalogueServlet?course_name=<%=second_catalogue.getS_name() %>" onclick="return delete_confirm()">
-								<i class="fa fa-times"></i></a>
-							</li>
-								<ul id="<%=second_catalogue.getS_name() %>" class="collapse menu-third">
-								<% 
-									List<Third_catalogue> third_catalogues = cataloguedao.findThird_catalogueBys_id(second_catalogue.getS_id());
-									for(Third_catalogue third_catalogue : third_catalogues){
-								%>
-									<li>
-										<a href="ShowCourseServlet?t_id=<%=third_catalogue.getT_id() %>&&role=<%=user.getRole()%>"><%=third_catalogue.getT_name() %></a>
-										<a href="DeleteThird_catalogueServlet?course_name=<%=third_catalogue.getT_name() %>" onclick="return delete_confirm()">
-											<i class="fa fa-times"></i>
-										</a>
-									</li>
-<%
-									} 
-%>
-                                </ul> 
-<%								
-	   						}
-%>
-                        </ul>
-<%
-							} 
-    					}
-						//管理员和普通用户身份
-						}else{
-							if(first_catalogues!=null){
-								for(First_catalogue first_catalogue : first_catalogues){
-%>							
-				<li>
-					<a href="#<%=first_catalogue.getF_name()%>" class="menu-first" data-toggle="collapse"><%=first_catalogue.getF_name() %>
-						<i class="pull-left fa fa-sort-desc"></i>
-					</a>
-				</li>
-						<ul id="<%=first_catalogue.getF_name()%>" class="collapse menu-second">
+			<%=table%>
 <% 
-	                       	int f_id = first_catalogue.getF_id();
-	   						List<Second_catalogue> second_catalogues = cataloguedao.findSecond_catalogueByf_id(f_id);
-	   						for(Second_catalogue second_catalogue : second_catalogues){
-%>
-							<li>
-								<a href="#<%=second_catalogue.getS_name() %>" data-toggle="collapse"><%=second_catalogue.getS_name() %></a>
-							</li>
-								<ul id="<%=second_catalogue.getS_name() %>" class="collapse menu-third">
-								<% 
-									List<Third_catalogue> third_catalogues = cataloguedao.findThird_catalogueBys_id(second_catalogue.getS_id());
-									for(Third_catalogue third_catalogue : third_catalogues){
-								%>
-									<li><a href="ShowCourseServlet?t_id=<%=third_catalogue.getT_id() %>&&role=<%=user.getRole()%>">
-											<%=third_catalogue.getT_name() %>
-										</a>
-									</li>
-<%
-									} 
-%>
-                                </ul> 
-<%								
-	   						}
-%>
-                        </ul>
-<%							
-						}
-							}
-						}
-%>
-                    </div>
+			}else{
+				System.out.println("读取目录失败");
+			}
+%>			
 		</div>
+	</div>
 		
 		<div class="col-md-8 fr-view">
-			<%
+			<div class="form-group">
+<%
 				Third_catalogue tc = (Third_catalogue)request.getAttribute("third_catalogue");
-			%>
+%>
+					<div class="col-md-11"></div>
+                	<a href="EditCourseServlet?t_id=<%=tc.getT_id() %>" class="btn btn-warning" id="editPage"
+                		style="background-color:#fff; color:#eea236; padding-top:3px; visibility:hidden">编辑</a>
+			</div>
+			
 			<%=tc.getT_content() %>
 		</div>
 	</div>
 </body>
 <!-- END BODY -->
+<script type="text/javascript">
+$(document).ready(function() {
+	var role = $("#userRole").attr("value");
+	//alert(role);
+	if(role==2 || role==3){
+		$("#editPage").css({visibility:"visible"});	
+	}else{
+		$("#editPage").css({visibility:"hidden"});
+	}
+});
 
-
+</script>
 </html>

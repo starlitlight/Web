@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8"%>
 <%@page import="com.ifilmo.domain.User"%>
+<%@page import="com.ifilmo.domain.Catalogue_table"%>
 <%@page import="com.ifilmo.domain.First_catalogue"%>
 <%@page import="com.ifilmo.domain.Second_catalogue"%>
 <%@page import="com.ifilmo.domain.Third_catalogue"%>
@@ -17,6 +18,7 @@
 <link href="<%=request.getContextPath() %>/bootstrap/css/new_course.css" rel="stylesheet">
 <script src="<%=request.getContextPath() %>/bootstrap/js/catalogue.js"></script>
 <script src="<%=request.getContextPath() %>/bootstrap/js/jquery-ui.js"></script>
+<script src="<%=request.getContextPath() %>/bootstrap/js/catalogue.js"></script>
 
 
 
@@ -42,8 +44,8 @@
 %>
 				<li>
 					<a href="#<%=first_catalogue.getF_name()%>" data-toggle="collapse"><%=first_catalogue.getF_name() %></a>
-						<a href="DeleteFirst_catalogueServlet?course_name=<%=first_catalogue.getF_name() %>" onclick="return delete_confirm()">
-							<i class="fa fa-times firstLayer"></i></a>
+						<a href="#" onclick="deleteCourse1(event)">
+							<i name="deleteIcon" class="fa fa-times" id="Icon1<%=first_catalogue.getF_name()%>"></i>
 						</a>
 					<ul id="<%=first_catalogue.getF_name()%>" class="collapse">
 						<div id="sortable2<%=first_catalogue.getF_name() %>" class="menu-second">
@@ -54,9 +56,9 @@
 %>
 							<li>
 								<a href="#<%=second_catalogue.getS_name() %>" data-toggle="collapse"><%=second_catalogue.getS_name() %></a>
-								<a href="DeleteSecond_catalogueServlet?course_name=<%=second_catalogue.getS_name() %>" onclick="return delete_confirm()">
-								<i class="fa fa-times secondLayer"></i></a>
-							
+								<a href="#" onclick="deleteCourse2(event)">
+									<i id="Icon2<%=second_catalogue.getS_name() %>" name="deleteIcon" class="fa fa-times"></i>
+								</a>
 								<ul id="<%=second_catalogue.getS_name() %>" class="collapse">
 									<div id="sortable3<%=second_catalogue.getS_name() %>" class="menu-third">
 								<% 
@@ -64,9 +66,9 @@
 									for(Third_catalogue third_catalogue : third_catalogues){
 								%>
 										<li>
-											<a><%=third_catalogue.getT_name() %></a>
-											<a href="DeleteThird_catalogueServlet?course_name=<%=third_catalogue.getT_name() %>" onclick="return delete_confirm()">
-												<i class="fa fa-times thirdLayer"></i>
+											<a href="ShowCourseServlet?t_name=<%=third_catalogue.getT_name() %>"><%=third_catalogue.getT_name() %></a>
+											<a href="#" onclick="deleteCourse3(event)">
+												<i id="Icon3<%=third_catalogue.getT_name() %>" name="deleteIcon" class="fa fa-times"></i>
 											</a>
 										</li>
 <%
@@ -85,64 +87,10 @@
 							} 
 %>
 			</div>
-			<div class="changeCatalogue" onclick="changeTable()">修改目录</div>
-			<div class="changeCatalogue" onclick="saveTable()">保存</div>
+			<button id="saveSortTable" class="changeCatalogue" onclick="saveTable()">保存目录顺序</button>
 		</div>
 	</div>
 </div>
 </body>
-
-<script>
-
-
-
-function changeTable() {
-	var IDs = [];
-	$(".nav-side-menu").find("div").each(function(){ 
-		IDs.push(this.id);
-		});
-	alert(IDs);
-	alert("请修改目录顺序");
-	for(i=0;i<IDs.length;i++){
-	    var ids = "#" + IDs[i];
-		$(ids).sortable({
-	    	axis: 'y',
-	    	containment: 'parent',
-	    	tolerance: "pointer",
-	    	opacity: 0.6, //设置拖动时候的透明度
-	    	revert: true, //缓冲效果 
-	        cursor: 'move', //拖动的时候鼠标样式 
-	    });
-	}
-}
-
-function saveTable() {
-    var saveHtml = $('.nav-side-menu').html();
-    alert(saveHtml);
-    var table={"content": saveHtml}
-    $.ajax({
-		type: "post",
-		data: table,
-		url: "sortableServlet",
-		dataType: "json",
-		success: function(data){
-			alert("存储成功");
-		},
-		error: function(err){
-		}
-		
-	});
-    var IDs = [];
-	$(".nav-side-menu").find("div").each(function(){ 
-		IDs.push(this.id);
-		});
-	for(i=0;i<IDs.length;i++){
-		var ids = "#" + IDs[i];
-		$(ids).sortable("disable");
-	}
-    alert("停止挪动");
-    
-}
-</script>
 
 </html>

@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8"%>
 <%@page import="com.ifilmo.domain.User"%>
+<%@page import="com.ifilmo.domain.Catalogue_table"%>
 <%@page import="com.ifilmo.domain.First_catalogue"%>
 <%@page import="com.ifilmo.domain.Second_catalogue"%>
 <%@page import="com.ifilmo.domain.Third_catalogue"%>
@@ -15,7 +16,7 @@
 
 <title>爱影</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="icon" type='image/jpg' href="<%=request.getContextPath() %>/bootstrap/images/logoOrange.png">
+<link rel="icon" type='image/png' href="<%=request.getContextPath() %>/bootstrap/images/logoOrange.png">
 <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/bootstrap/css/font-awesome.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/bootstrap/css/head.css" rel="stylesheet">
@@ -23,31 +24,9 @@
 <script src="<%=request.getContextPath() %>/bootstrap/js/jquery.js"></script>
 <script src="<%=request.getContextPath() %>/bootstrap/js/bootstrap.js"></script>
 <script src="<%=request.getContextPath() %>/bootstrap/js/jquery-ui.js"></script>
+<script src="<%=request.getContextPath() %>/bootstrap/js/catalogue.js"></script>
 </head>
 <!-- END HEAD -->
-
-<!--
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#login').click(function(){
-			var user_name = $('#user_name').val();
-			var user_password = $('#user_password').val();
-			$.ajax({
-				dataType : 'json',
-				type:'POST',
-				data:{
-					user_name: user_name,
-					user_password: user_password},
-				url:'LoginServlet',
-				success: function(data){
-						alert(data.user_name);
-	                }
-			});
-		});
-	});
-</script>
--->
-
 <!-- BEGIN BODY -->
 <body>
 <%
@@ -108,13 +87,12 @@
 							<i class="fa fa-sort-desc"></i>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a href="UserAccountServlet?user_id=<%=user.getUser_id() %>"><i class="fa fa-info"></i>
-									账户设置</a></li>
+							<li><a href="UserAccountServlet?user_id=<%=user.getUser_id() %>"><i class="fa fa-info"></i> 账户设置</a></li>
 							<li><a data-toggle="modal" data-target="#addUser"><i
 										class="fa fa-user-plus"></i> 添加新用户</a></li>
-							<li><a href="FindAllUserServlet"><i class="fa fa-users"></i>
-									查看用户信息</a></li>
-							<li><a href="LogoutServlet"><i class="fa fa-sign-out"></i>退出登录</a></li>
+							<li><a href="FindAllUserServlet"><i class="fa fa-users"></i> 查看用户信息</a></li>
+							<li><a href="#" onclick="changeTable()"><i class="fa fa-pencil-square-o"></i> 修改目录</a></li>
+							<li><a href="LogoutServlet"><i class="fa fa-sign-out"></i> 退出登录</a></li>
 						</ul>
 					</li>
 <% 
@@ -128,13 +106,13 @@
 							<i class="fa fa-sort-desc"></i>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a href="UserAccountServlet?user_id=<%=user.getUser_id() %>"><i class="fa fa-info"></i>
-									账户设置</a></li>
+							<li><a href="UserAccountServlet?user_id=<%=user.getUser_id() %>"><i class="fa fa-info"></i> 账户设置</a></li>
 							<li><a data-toggle="modal" data-target="#addUser2"><i
 								class="fa fa-user-plus"></i> 添加新用户</a></li>
-							<li><a href="FindAllUserServlet"><i class="fa fa-users"></i>
-									查看用户群组</a></li>
-							<li><a href="LogoutServlet"><i class="fa fa-sign-out"></i>退出登录</a></li>
+							<li><a href="FindAllUserServlet"><i class="fa fa-users"></i> 查看用户群组</a></li>
+							<li><a href="#" onclick="changeTable()"><i class="fa fa-pencil-square-o"></i> 修改目录</a></li>
+							<li><a href="#" onclick="visibleDeleteIcon()"><i class="fa fa-remove"></i> 删除目录</a></li>
+							<li><a href="LogoutServlet"><i class="fa fa-sign-out"></i> 退出登录</a></li>
 						</ul>
 					</li>
 <% 

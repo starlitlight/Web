@@ -235,8 +235,9 @@ public class CatalogueDAOImpl implements CatalogueDAO {
 	}
 	
 	public Third_catalogue findThird_catalogueByName(String courseName) {
-		String sql = "SELECT * FROM third_catalogue WHERE  t_name= '" + courseName + "'";
 		Third_catalogue third_catalogue = null;
+		String sql = "SELECT * FROM third_catalogue WHERE  t_name= '" + courseName + "'";
+		System.out.println(sql);
 		try {
 			List<Object> entitys = jdbctemplate.query(sql, new third_catalogueMapping());
 			if(entitys.size()!=0){

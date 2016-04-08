@@ -1,7 +1,6 @@
 package com.ifilmo.servlet.catalogue;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,15 +21,18 @@ public class DeleteFirst_catalogueServlet extends HttpServlet{
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 //		String course_name = new String(request.getParameter("course_name").getBytes("iso8859-1"), "utf-8");
-		String course_name = request.getParameter("course_name");
+		String course_name = request.getParameter("delCourseName");
 		System.out.println(course_name);
 		CatalogueDAO  cataloguedao = new CatalogueDAOImpl();
 		if(cataloguedao.deleteFirst_catalogue(course_name)){
 			//request.setAttribute("", );
+			System.out.println("删除第一级目录成功");
+			 
 		}else{
 			System.out.println("删除第一级目录失败");
 		}
-		request.getRequestDispatcher("/showAddCourseServlet").forward(request, response);
+		
+		//request.getRequestDispatcher("/showAddCourseServlet").forward(request, response);
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)

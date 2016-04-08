@@ -110,11 +110,13 @@
 
 <script>
 function changeTable() {
+	var saveSortTable = document.getElementById("saveSortTable");
+	saveSortTable.style.visibility = "visible";
 	var IDs = [];
 	$(".nav-side-menu").find("div").each(function(){ 
 		IDs.push(this.id);
 		});
-	alert(IDs);
+	//alert(IDs);
 	alert("请修改目录顺序");
 	for(i=0;i<IDs.length;i++){
 	    var ids = "#" + IDs[i];

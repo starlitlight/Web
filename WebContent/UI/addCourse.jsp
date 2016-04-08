@@ -15,15 +15,6 @@
 <title>爱影</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="bootstrap/css/new_course.css" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/froala_editor.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/froala_style.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/code_view.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/image.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/image_manager.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/table.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
 <script src="<%=request.getContextPath() %>/bootstrap/js/select.js"></script>
 </head>
 <!-- END HEAD -->
@@ -35,103 +26,25 @@
 
 <div class="row" style="margin-top: 60px;">
 	<div class="col-md-3">
-				<div class="nav-side-menu">
-<%
-						User user_catalogue = (User)session.getAttribute("user");
-	                    CatalogueDAO cataloguedao = new CatalogueDAOImpl();
-						List<First_catalogue> first_catalogues = cataloguedao.findFirst_catalogue();
-						//超级管理员身份
-						if(user.getRole()==3){
-						if(first_catalogues!=null){
-							for(First_catalogue first_catalogue : first_catalogues){
-%>
-				<li>
-					<a href="#<%=first_catalogue.getF_name()%>" class="menu-first" data-toggle="collapse"><%=first_catalogue.getF_name() %>
-						<i class="pull-left fa fa-sort-desc"></i>
-						<a href="DeleteFirst_catalogueServlet?course_name=<%=first_catalogue.getF_name() %>" onclick="return delete_confirm()">
-							<i  class="fa fa-times"></i></a>
-					</a>
-				</li>
-						<ul id="<%=first_catalogue.getF_name()%>" class="collapse menu-second">
+		<div class="nav-side-menu">
 <% 
-	                       	int f_id = first_catalogue.getF_id();
-	   						List<Second_catalogue> second_catalogues = cataloguedao.findSecond_catalogueByf_id(f_id);
-	   						for(Second_catalogue second_catalogue : second_catalogues){
+			CatalogueDAO  cataloguedao = new CatalogueDAOImpl();
+			Catalogue_table catalogue= cataloguedao.selectCatalogue();
+			if(catalogue!=null){
+				String table = catalogue.getContent();
 %>
-							<li>
-								<a href="#<%=second_catalogue.getS_name() %>" data-toggle="collapse"><%=second_catalogue.getS_name() %></a>
-								<a href="DeleteSecond_catalogueServlet?course_name=<%=second_catalogue.getS_name() %>" onclick="return delete_confirm()">
-								<i class="fa fa-times"></i></a>
-							</li>
-								<ul id="<%=second_catalogue.getS_name() %>" class="collapse menu-third">
-								<% 
-									List<Third_catalogue> third_catalogues = cataloguedao.findThird_catalogueBys_id(second_catalogue.getS_id());
-									for(Third_catalogue third_catalogue : third_catalogues){
-								%>
-									<li>
-										<a href="ShowCourseServlet?t_id=<%=third_catalogue.getT_id() %>&&role=<%=user.getRole()%>"><%=third_catalogue.getT_name() %></a>
-										<a href="DeleteThird_catalogueServlet?course_name=<%=third_catalogue.getT_name() %>" onclick="return delete_confirm()">
-											<i class="fa fa-times"></i>
-										</a>
-									</li>
-<%
-									} 
-%>
-                                </ul> 
-<%								
-	   						}
-%>
-                        </ul>
-<%
-							} 
-    					}
-						//管理员和普通用户身份
-						}else{
-							if(first_catalogues!=null){
-								for(First_catalogue first_catalogue : first_catalogues){
-%>							
-				<li>
-					<a href="#<%=first_catalogue.getF_name()%>" class="menu-first" data-toggle="collapse"><%=first_catalogue.getF_name() %>
-						<i class="pull-left fa fa-sort-desc"></i>
-					</a>
-				</li>
-						<ul id="<%=first_catalogue.getF_name()%>" class="collapse menu-second">
+			<%=table%>
 <% 
-	                       	int f_id = first_catalogue.getF_id();
-	   						List<Second_catalogue> second_catalogues = cataloguedao.findSecond_catalogueByf_id(f_id);
-	   						for(Second_catalogue second_catalogue : second_catalogues){
-%>
-							<li>
-								<a href="#<%=second_catalogue.getS_name() %>" data-toggle="collapse"><%=second_catalogue.getS_name() %></a>
-							</li>
-								<ul id="<%=second_catalogue.getS_name() %>" class="collapse menu-third">
-								<% 
-									List<Third_catalogue> third_catalogues = cataloguedao.findThird_catalogueBys_id(second_catalogue.getS_id());
-									for(Third_catalogue third_catalogue : third_catalogues){
-								%>
-									<li><a href="ShowCourseServlet?t_id=<%=third_catalogue.getT_id() %>&&role=<%=user.getRole()%>">
-											<%=third_catalogue.getT_name() %>
-										</a>
-									</li>
-<%
-									} 
-%>
-                                </ul> 
-<%								
-	   						}
-%>
-                        </ul>
-<%							
-						}
-							}
-						}
-%>
-                    </div>
+			}else{
+				System.out.println("读取目录失败");
+			}
+%>			
 		</div>
+	</div>
 		
 	<div class="col-md-8">
 		<div class="row user_info" style="margin-top:30px; margin-left:10px"> 
-        	<form role="form" class="newCourse" action="addCourseServlet" method="post">
+        	<form role="form" id="newCourse">
             	<div class="form-group row">
                 	<div class="col-md-12">
 						<h3>添加新课程:</h3>
@@ -144,6 +57,7 @@
 					</div>
 					<div class="col-md-6">	
                     	<input type="text" class="form-control" id="courseName" name="courseName" placeholder="新课程名称">
+                    	<div id="NewCourseName" style="color:red; visibility:hidden;">请输入新课程的名称!</div>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -160,7 +74,8 @@
 						<select class="form-control" name="selectCourse1" id="selectCourse1" onChange="changeSelect()">
 							<option selected="selected" value="0">请选择目录</option>                                    
 <%
-                     for(First_catalogue first_catalogue : first_catalogues){
+					List<First_catalogue> first_catalogues = cataloguedao.findFirst_catalogue();
+					for(First_catalogue first_catalogue : first_catalogues){
 %>
                          	<option value=<%=first_catalogue.getF_id() %>><%=first_catalogue.getF_name() %></option>
 <%
@@ -179,7 +94,14 @@
 				</div>
 				<div class="form-group row">
 					<div class="col-md-12">
-						<input class="btn btn-warning" value="保存" type="submit">   
+						<div class="inserCourseWarn">提示：1.如果一级二级目录都不选，则添加一级目录</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+						      2.如果只选择了一级目录，则添加该一级目录下的子目录</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+						      3.如果选择了一级，二级目录，则添加该一级目录下二级目录的子目录</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-md-12">
+						<input class="btn btn-warning" value="保存" type="button" onclick="insertCourse();">   
 						<input class="btn btn-warning" style="background-color:#fff; color:#eea236" value="取消" type="reset">
 					</div>
 				</div>
@@ -192,16 +114,4 @@
 
 
 </body>
-
-<script>
-function delete_confirm() {
-    var msg = "您确定要删除该目录吗？";
-    if (confirm(msg)==true){
-      return true;
-    }else{
-      return false;
-    }
-}
-</script>
-
 </html>

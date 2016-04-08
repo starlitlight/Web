@@ -22,8 +22,7 @@ public class DeleteSecond_catalogueServlet extends HttpServlet{
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//String course_name = new String(request.getParameter("course_name").getBytes("iso8859-1"), "utf-8");
-		String course_name = request.getParameter("course_name");
-		System.out.println(course_name);
+		String course_name = request.getParameter("delCourseName");
 		CatalogueDAO  cataloguedao = new CatalogueDAOImpl();
 		if(cataloguedao.deleteSecond_catalogue(course_name)){
 			//request.setAttribute("", );

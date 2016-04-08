@@ -11,6 +11,14 @@
 	padding: 0px;
 }
 
+.inserCourseWarn{
+	margin-top: 20px;
+	margin-bottom: 30px;
+	font-family: "平方", "微软雅黑", "宋体";
+	font-size: 12px;
+	opacity: 0.6;
+}
+
 input#courseName.form-control{
     width: 200px;
 }

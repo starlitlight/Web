@@ -6,7 +6,7 @@
 	<display-name>iFilmo</display-name>
 
 	<welcome-file-list>
-		<welcome-file>/UI/saveTable.jsp</welcome-file>
+		<welcome-file>/UI/main.jsp</welcome-file>
 	</welcome-file-list>
 <!-- 
 	<filter>
@@ -354,5 +354,16 @@
 		<servlet-name>searchCourseServlet</servlet-name>
 		<url-pattern>/searchCourseServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<display-name>编辑课程</display-name>
+		<servlet-name>EditCourseServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.catalogue.EditCourseServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditCourseServlet</servlet-name>
+		<url-pattern>/EditCourseServlet</url-pattern>
+	</servlet-mapping>
+	
 	
 </web-app>

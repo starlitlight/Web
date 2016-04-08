@@ -1,7 +1,6 @@
 package com.ifilmo.servlet.catalogue;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -24,9 +23,9 @@ public class sortableServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8"); 
 		request.setCharacterEncoding("utf-8");
 		
-		System.out.println("jinlai");
+		
 		String htmlCode = request.getParameter("content");
-		System.out.println(htmlCode);
+		
 		CatalogueDAO  cataloguedao = new CatalogueDAOImpl();
 		if(cataloguedao.updateCatalogue(htmlCode)){
 			System.out.println("保存拖拽成功");

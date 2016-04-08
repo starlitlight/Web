@@ -24,6 +24,7 @@ public class addCourseContentServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String content = request.getParameter("edit");
 		int t_id = Integer.parseInt(request.getParameter("t_id"));
+		
 		String msg = "FAILED";
 		CatalogueDAO cataloguedao = new CatalogueDAOImpl();
 		
