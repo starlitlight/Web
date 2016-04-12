@@ -10,6 +10,7 @@ public class getImageSrc {
 	public static List<String> getImageSrc(String htmlCode) {
 	    List<String> imageSrcList = new ArrayList<String>();
 	    Pattern p = Pattern.compile("<img\\b[^>]*\\bsrc\\b\\s*=\\s*('|\")?([^'\"\n\r\f>]+(\\.jpg|\\.bmp|\\.eps|\\.gif|\\.mif|\\.miff|\\.png|\\.tif|\\.tiff|\\.svg|\\.wmf|\\.jpe|\\.jpeg|\\.dib|\\.ico|\\.tga|\\.cut|\\.pic)\\b)[^>]*>", Pattern.CASE_INSENSITIVE);
+	    System.out.println("HTML CODE IS " + htmlCode);
 	    Matcher m = p.matcher(htmlCode);
 	    String quote = null;
 	    String src = null;
@@ -53,14 +54,14 @@ public class getImageSrc {
 		return textStr;//返回文本字符串
 		}
 	
-	public static void main(String[] args){
-		String content = "<p><img class='fr-dib' src='http://i.froala.com/download/fa7828d1ec63daa31cd41aa2ba666293322507da.jpg?1456621593' style='width: 300px;'>";
-//		List<String> content2 = getImageSrc.getImageSrc(content);
-//		for(String contents:  content2){
-//			System.out.println(contents);
-//		}
-		String value = getImageSrc.Html2Text(content);
-		System.out.println(value);
-	}
+//	public static void main(String[] args){
+//		String content = "<p><img class='fr-dib' src='http://i.froala.com/download/fa7828d1ec63daa31cd41aa2ba666293322507da.jpg?1456621593' style='width: 300px;'>";
+////		List<String> content2 = getImageSrc.getImageSrc(content);
+////		for(String contents:  content2){
+////			System.out.println(contents);
+////		}
+//		String value = getImageSrc.Html2Text(content);
+//		System.out.println(value);
+//	}
 
 }

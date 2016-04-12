@@ -1,15 +1,20 @@
 package com.ifilmo.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.ifilmo.dao.UserDAO;
 import com.ifilmo.dao.impl.UserDAOImpl;
 import com.ifilmo.domain.User;
+
+import net.sf.json.JSONObject;
 
 public class UpdateRoleByUserIdServlet extends HttpServlet {
 
@@ -23,16 +28,21 @@ public class UpdateRoleByUserIdServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		int user_id = Integer.parseInt(request.getParameter("user_id"));
-		int role = Integer.parseInt(request.getParameter("role"));	
-
+		int role = Integer.parseInt(request.getParameter("role"));
+		
+		JSONObject json = new JSONObject();
+		PrintWriter pw = response.getWriter(); 
+		
+		System.out.println(user_id + "      " + role);
 		UserDAO userdao = new UserDAOImpl();		
-		String msg = "FAILED";
+		
 		if(userdao.UpdateRoleByUserId(role, user_id)){
-            request.getRequestDispatcher("/FindAllUserServlet").forward(request, response);
+			json.put("message", "修改用户权限成功！");
         }else{
-            request.setAttribute("message", "�޸�Ȩ�޴���");  
-            request.getRequestDispatcher("/UI/main.jsp").forward(request, response);  
-        }  
+        	json.put("message", "修改用户权限失败！");
+        } 
+		pw.print(json.toString());
+		pw.close();
 
 	}
 

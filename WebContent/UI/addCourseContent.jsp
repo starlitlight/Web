@@ -14,23 +14,11 @@
 <head>
 <title>爱影</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <link href="bootstrap/css/new_course.css" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-<link href="<%=request.getContextPath() %>/bootstrap/css/font-awesome.css" rel="stylesheet">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/froala_editor.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/froala_style.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/char_counter.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/code_view.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/colors.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/file.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/fullscreen.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/image.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/image_manager.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/line_breaker.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/quick_insert.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/table.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/editor/css/plugins/video.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/wangEditor/dist/css/wangEditor.min.css">
+<script src="<%=request.getContextPath()%>/wangEditor/dist/js/lib/jquery-1.10.2.min.js"></script>
+<script src="<%=request.getContextPath()%>/wangEditor/dist/js/wangEditor.js"></script>
 </head>
 <!-- END HEAD -->
 
@@ -57,69 +45,104 @@
 		</div>
 	</div>
 <%
-					Third_catalogue tc = (Third_catalogue)request.getAttribute("third_catalogue");
-					int t_id = tc.getT_id();
+				Third_catalogue tc = (Third_catalogue)request.getAttribute("third_catalogue");
+				int t_id = tc.getT_id();
 %>
 	<div class="col-md-8">
-		<div class="row" style="padding-top: 20px; padding-left:60px;"> 
+		<div class="row" style="padding-top: 20px; padding-left:20px;"> 
 			<form role="form" class="newCourse" action="addCourseContentServlet" method="post">
 				<div class="form-group">
-					<div class="col-md-9"></div>
+					<div class="col-md-9">
+						<label class="form-label">课程名:</label>
+						<input type="text" class="form-control" id="courseName" name="courseName" value="<%=tc.getT_name() %>" style="display:inline" readonly>
+					</div>
                 	<a href="PreviewCourseServlet?t_id=<%=t_id %>" class="btn btn-warning" 
                 		style="background-color:#fff; color:#eea236; padding-top:3px;">预览</a>
-                		<!--  
-                	<button class="btn btn-warning" type="reset" style="background-color:#fff; color:#eea236">取消</button>
-                	-->
 					<button class="btn btn-warning" type="submit">保存</button>
 				</div>
 				<div class="form-group">
-					
-					<textarea id='edit' name="edit" class="fr-view">
-				  		<input name="t_id" value="<%=t_id%>" type="hidden"/>
-				  		<%=tc.getT_content() %>
+					<input name="t_id" value="<%=t_id%>" type="hidden"/>
+					<textarea id="editor-trigger" name="edit" style="height:455px; width:90%;">
+						<%=tc.getT_content() %>
 					</textarea>
 				</div>
 			</form>
 		</div>
 	</div>
-  
+  </div>
 
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
-  <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/froala_editor.min.js"></script>
-  <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/code_beautifier.min.js"></script>
-  <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/code_beautifier.min.js"></script>
-  <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/code_view.min.js"></script>
-  <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/font_size.min.js"></script>
-  <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/font_family.min.js"></script>
-  <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/lists.min.js"></script>
-  <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/image.min.js"></script>
-  <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/link.min.js"></script>
-  <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/video.min.js"></script>
-  <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/align.min.js"></script>
-  <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/paragraph_format.min.js"></script>
-  <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/colors.min.js"></script>
-  <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/table.min.js"></script>
-  <script type="text/javascript" src="<%=request.getContextPath() %>/editor/js/plugins/fullscreen.min.js"></script>
+<script type="text/javascript">
+	// 阻止输出log
+	// wangEditor.config.printLog = false;
 
-<script>
-    $(function(){
-      $('#edit').froalaEditor({
-        toolbarButtons: ['fullscreen','undo', 'redo', '|', 'fontFamily', 'fontSize', 'bold', 'italic', 'underline', 'color', '|', 'formatOL', 'formatUL', 'paragraphFormat', 'indent', 'outdent', 'align', '|', 'insertTable', 'insertImage', 'insertVideo'],
-        // Colors list.
-        colorsBackground: [
-          '#15E67F', '#E3DE8C', '#D8A076', '#D83762', '#76B6D8', 'REMOVE',
-          '#1C7A90', '#249CB8', '#4ABED9', '#FBD75B', '#FBE571', '#FFFFFF'
-        ],
-        colorsDefaultTab: 'background',
-        colorsStep: 6,
-        colorsText: [
-          '#15E67F', '#E3DE8C', '#D8A076', '#D83762', '#76B6D8', 'REMOVE',
-          '#1C7A90', '#249CB8', '#4ABED9', '#FBD75B', '#FBE571', '#FFFFFF'
-        ]
-      })
-    });
+	var editor = new wangEditor('editor-trigger');
+
+	// 上传图片
+	editor.config.uploadImgUrl = 'UploadImgServlet';
+
+	// 表情显示项
+	//editor.config.emotionsShow = 'value';
+
+	// 跨域上传
+	//editor.config.uploadImgUrl = 'http://localhost:8012/upload';
+
+	// 第三方上传
+	// editor.config.customUpload = true;
+
+	// onchange 事件
+	// editor.onchange = function () {
+	//     console.log(this.$txt.html());
+	// };
+
+	// 取消过滤js
+	//editor.config.jsFilter = false;
+
+	// 取消粘贴过来
+	// editor.config.pasteFilter = false;
+
+	// 设置 z-index
+	// editor.config.zindex = 20000;
+
+	// 语言
+	//editor.config.lang = wangEditor.langs['en'];
+
+	//自定义菜单
+	editor.config.menus = [ 
+		'fullscreen', 
+		'undo',
+		'redo',
+		'|',
+		'fontfamily', 
+		'fontsize', 
+		'bold',
+		'italic',
+		'underline', 
+		'bgcolor',
+		'forecolor',
+		'|',
+		'orderlist',
+		'lineheight',
+		'indent',
+		'unorderlist', 
+		'alignleft',
+		'aligncenter',
+		'alignright',
+		'|',
+		'table',
+		'img',
+		'video',
+		'source'
+		];
+	
+	editor.create();
+	$(function(){
+	    //获取dom节点
+	    var $uploadContainer = $('#uploadContainer'),
+	            $fileList = $('#fileList'),
+	          $btnUpload = $('#btnUpload');
+
+	    var editor = wangEditor('editor-trigger')	;
+	});
 </script>
 </body>
 </html>

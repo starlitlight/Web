@@ -203,6 +203,22 @@ public class UserDAOImpl implements UserDAO {
 		return user;
 	}
 	
+	public List<User> findUserNameAndEmail(String userName, String email){
+		List<User> users = null;
+		String sql = "SELECT * FROM user WHERE user_name = '"+ userName + "' or email = '" + email + "'";
+		System.out.println(sql);
+		try {
+			users = jdbctemplate.query(sql, new userMapping());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return users;
+	}
+	
 	public User findUserByEmail(String email){
 		User user = null;
 		String sql = "SELECT * FROM user WHERE email = "+ "'" + email +"'";

@@ -1,15 +1,15 @@
 package com.ifilmo.domain;
 
 /**
- * 二级目录目录实体类
+ * 锟斤拷锟斤拷目录目录实锟斤拷锟斤拷
  */
 public class Second_catalogue {
 	
-	int s_id;
-	//二级目录名
-	String s_name;
-	//一级目录ID
-	int f_id;
+	private int s_id;
+	//锟斤拷锟斤拷目录锟斤拷
+	private String s_name;
+	//一锟斤拷目录ID
+	private int f_id;
 	
 	public Second_catalogue(int s_id, String s_name, int f_id) {
 		this.s_id = s_id;

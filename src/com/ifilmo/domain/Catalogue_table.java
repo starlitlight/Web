@@ -6,8 +6,8 @@ package com.ifilmo.domain;
 
 public class Catalogue_table {
 	
-	int id;
-	String content;
+	private int id;
+	private String content;
 	
 	public Catalogue_table(int id, String content) {
 		super();

@@ -49,7 +49,7 @@
 						</div>
 						<%
 								String path = request.getContextPath() + File.separator + "images" + File.separator + user_info.getPhoto();
-								System.out.println("图片路径：" + path);
+								System.out.println("上传头像路径：" + path);
 								
 							%>
 						<div class="form-group row">

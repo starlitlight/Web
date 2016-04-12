@@ -24,47 +24,20 @@
 	<%@ include file="/UI/head.jsp"%>
 		<div class="row" style="margin-top: 60px;">
 			<div class="col-md-3">
-			<div class="nav-side-menu">
-<%
-	                    CatalogueDAO cataloguedao = new CatalogueDAOImpl();
-						List<First_catalogue> first_catalogues = cataloguedao.findFirst_catalogue();
-						if(first_catalogues!=null){
-							for(First_catalogue first_catalogue : first_catalogues){
-%>
-				<li>
-					<a href="#<%=first_catalogue.getF_name()%>" class="menu-first" data-toggle="collapse"><%=first_catalogue.getF_name() %>
-						<i class="pull-left fa fa-sort-desc"></i>
-					</a>
-				</li>
-						<ul id="<%=first_catalogue.getF_name()%>" class="collapse menu-second">
-<% 
-	                       	int f_id = first_catalogue.getF_id();
-	   						List<Second_catalogue> second_catalogues = cataloguedao.findSecond_catalogueByf_id(f_id);
-	   						for(Second_catalogue second_catalogue : second_catalogues){
-%>
-							<li>
-								<a href="#<%=second_catalogue.getS_name() %>" data-toggle="collapse"><%=second_catalogue.getS_name() %></a>
-							</li>
-								<ul id="<%=second_catalogue.getS_name() %>" class="collapse menu-third">
-								<% 
-									List<Third_catalogue> third_catalogues = cataloguedao.findThird_catalogueBys_id(second_catalogue.getS_id());
-									for(Third_catalogue third_catalogue : third_catalogues){
-								%>
-									<li><a href="#" data-toggle="collapse"><%=third_catalogue.getT_name() %></a></li>
-<%
-									} 
-%>
-                                </ul> 
-							
-<%								
-	   						}
-%>
-                        </ul>
-<%
-							} 
-    					}
-%>
-                    </div>
+				<div class="nav-side-menu">
+		<% 
+					CatalogueDAO  cataloguedao = new CatalogueDAOImpl();
+					Catalogue_table catalogue= cataloguedao.selectCatalogue();
+					if(catalogue!=null){
+						String table = catalogue.getContent();
+		%>
+					<%=table%>
+		<% 
+					}else{
+						System.out.println("读取目录失败");
+					}
+		%>			
+				</div>
 		</div>
 <%
 			User user_info = (User)request.getAttribute("user");
@@ -73,6 +46,8 @@
 			<div class="col-md-8">
 				<div class="row" style="padding-top: 60px; padding-left: 60px">
 					<!-- left column -->
+					<div class="col-md-4"></div>
+					<div class="col-md-8">
 					<form class="form-horizontal" name="resetPassword" method="post" onsubmit="return resetPwd()">
 						<div class="form-group">
 							<label> 输入新密码:</label>
@@ -87,10 +62,11 @@
 	            			<div id="wrongPwd" style="color:red; visibility:hidden;">两次密码不一致!请重新输入</div>
 	            		</div>
 	            		<div class="form-group">
-	            			<button class="btn btn-lg btn-primary" type="submit">确认</button>
-	            			<button class="btn btn-lg btn-primary" type="reset">重设</button>
+	            			<button class="btn btn-warning" type="submit">确认</button>
+	            			<button class="btn btn-warning" type="reset" style="background-color:#fff; color:#eea236;">重设</button>
 	            		</div>
 					</form>
+					</div>
 				</div>
 			</div>
 		</div>

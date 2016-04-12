@@ -53,18 +53,15 @@ public class EmailServlet extends HttpServlet {
 			String key = user.getUser_name()+"$"+outDate+"$"+secretKey;
 			String digitalSignature = GenerateLinkUtils.md5(key);//数字签名
 			
-			 
-			
 			String emailTitle = "密码找回";  
 	        String path = request.getContextPath();
 	        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
 	        String resetPassHref =  basePath+"ResetPasswordServlet?s_id="+digitalSignature+"&email="+user.getEmail();
-	        String emailContent = "请勿回复本邮件.点击下面的链接,重设密码<br/><a href="+resetPassHref +" target='_BLANK'>点击我重新设置密码</a>" +  
-	                "<br/>tips:本邮件超过30分钟,链接将会失效"; 
+	        String emailContent = "请勿回复本邮件.点击下面的链接,重设密码<br/><a href="+resetPassHref +" target='_BLANK'>点击我重新设置密码</a>"; 
 		
 			Properties props = new Properties();
 			props.put("mail.debug", "true");
-			props.put("mail.smtp.host", "smtp.gmail.com");
+			props.put("mail.smtp.host", "smtp.exmail.qq.com");
 			props.put("mail.smtp.socketFactory.port", "465");
 			props.put("mail.smtp.socketFactory.class",
 					"javax.net.ssl.SSLSocketFactory");
@@ -74,14 +71,14 @@ public class EmailServlet extends HttpServlet {
 			Session session = Session.getDefaultInstance(props,
 				new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication("abelldandyyy@gmail.com","Lfm890918!");
+						return new PasswordAuthentication("services@ifilmo.com","1234Qwer!");
 					}
 				});
 			try {
 				Multipart mp = new MimeMultipart();
 				MimeBodyPart mbp = new MimeBodyPart();
 				Message message = new MimeMessage(session);
-				message.setFrom(new InternetAddress("abelldandyyy@gmail.com"));
+				message.setFrom(new InternetAddress("services@ifilmo.com"));
 				message.setRecipients(Message.RecipientType.TO,
 						InternetAddress.parse(email));
 				message.setSubject(emailTitle);

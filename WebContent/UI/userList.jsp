@@ -134,19 +134,19 @@
 <div class="modal fade" id="power" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form id="UpdateRoleByUserId" action="UpdateRoleByUserIdServlet" method="post">
+			<form id="UpdateRoleByUserId" method="post">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
 					<h2 class="login-heading">用户权限</h2>
 				</div>
 				<div class="modal-body">
-					<input type="hidden" id="id" type="text" name="user_id" />
-						<input class="radio" type="radio" name="role" value="1" id="readonly" />只读
-						<input class="radio" type="radio" name="role" value="2" id="edit" />编辑
+						<input type="hidden" id="id" type="text" name="user_id" />
+						<input class="radio" type="radio" name="roleAuthority" value="1" id="readonly" />只读
+						<input class="radio" type="radio" name="roleAuthority" value="2" id="edit" />编辑
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-lg btn-primary btn-block" type="submit">确定</button>
+					<button class="btn btn-lg btn-primary btn-block" type="button" onclick="changeAuthority()">确定</button>
 				</div>
 			</form>
 		</div>
@@ -157,15 +157,14 @@
 	function resume(obj){
 		var tds=$(obj).parent().parent().find('td');
 		if(tds.eq(3).text()=='只读'){
-			$('#readonly').prop("checked",true);
 			$('#edit').prop("checked",false);
-		}else{
+			$('#readonly').prop("checked",true);
+		}if(tds.eq(3).text()=='编辑'){
 			$('#edit').prop("checked",true);
 			$('#readonly').prop("checked",false);
-			//$('#edit').attr("checked","checked");
 			}
 		$('#id').val(tds.eq(0).text())
-		$('#role').val(tds.eq(3).text());
+		//$('.roleAuthority').val(tds.eq(3).text());
 		//$('#role').val(tds.eq(0).text());
 		$('#power').modal('show');
 	}
@@ -249,6 +248,27 @@
 							firstPage();
 						});
 			});	
+	
+	function changeAuthority(){
+		var user_id = document.getElementById("id").value;
+		//var role = $("input[name='roleAuthority'][checked]").val();
+		var role = UpdateRoleByUserId.roleAuthority.value;
+		
+		
+		var authority={"user_id": user_id, "role": role};
+		$.ajax({
+			type: "post",
+			url: "UpdateRoleByUserIdServlet",
+			data: authority,
+			dataType: "json",
+			success: function(data){
+				alert(data.message);
+			},
+			error: function(err){
+				alert(err.message);
+			}
+		});
+	}
 	
 </script>
 </html>

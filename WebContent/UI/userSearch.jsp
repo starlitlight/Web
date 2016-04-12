@@ -25,49 +25,22 @@
 
 <div class="row" style="margin-top: 60px;">
 	<div class="col-md-3">
-			<div class="nav-side-menu">
+				<div class="nav-side-menu">
 <%
-	                    CatalogueDAO cataloguedao = new CatalogueDAOImpl();
-						List<First_catalogue> first_catalogues = cataloguedao.findFirst_catalogue();
-						if(first_catalogues!=null){
-							for(First_catalogue first_catalogue : first_catalogues){
+			CatalogueDAO  cataloguedao = new CatalogueDAOImpl();
+			Catalogue_table catalogue= cataloguedao.selectCatalogue();
+			if(catalogue!=null){
+				String table = catalogue.getContent();
 %>
-				<li>
-					<a href="#<%=first_catalogue.getF_name()%>" class="menu-first" data-toggle="collapse"><%=first_catalogue.getF_name() %>
-						<i class="pull-left fa fa-sort-desc"></i>
-					</a>
-				</li>
-						<ul id="<%=first_catalogue.getF_name()%>" class="collapse menu-second">
+			<input name="userRole" id="userRole" value="<%=user.getRole()%>" type="hidden"/>
+			<%=table%>
 <% 
-	                       	int f_id = first_catalogue.getF_id();
-	   						List<Second_catalogue> second_catalogues = cataloguedao.findSecond_catalogueByf_id(f_id);
-	   						for(Second_catalogue second_catalogue : second_catalogues){
-%>
-							<li>
-								<a href="#<%=second_catalogue.getS_name() %>" data-toggle="collapse"><%=second_catalogue.getS_name() %></a>
-							</li>
-								<ul id="<%=second_catalogue.getS_name() %>" class="collapse menu-third">
-								<% 
-									List<Third_catalogue> third_catalogues = cataloguedao.findThird_catalogueBys_id(second_catalogue.getS_id());
-									for(Third_catalogue third_catalogue : third_catalogues){
-								%>
-									<li><a href="ShowCourseServlet?t_id=<%=third_catalogue.getT_id() %>">
-									<%=third_catalogue.getT_name() %></a></li>
-<%
-									} 
-%>
-                                </ul> 
-							
-<%								
-	   						}
-%>
-                        </ul>
-<%
-							} 
-    					}
-%>
-                    </div>
-		</div>
+			}else{
+				System.out.println("读取目录失败");
+			}
+%>			
+				</div>
+			</div>
 		
 	<div class="col-md-8">
 		<div class="row" style="padding-top: 60px; padding-left:60px; ">

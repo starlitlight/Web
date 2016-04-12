@@ -62,4 +62,6 @@ public interface UserDAO {
 	public boolean UpdateCodeByUserId(String code, Timestamp outDate, int user_id);
 	
 	public User findUserByName(String username);
+	
+	public List<User> findUserNameAndEmail(String userName, String email);
 }

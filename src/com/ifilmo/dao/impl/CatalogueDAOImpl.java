@@ -10,13 +10,11 @@ import com.ifilmo.domain.First_catalogue;
 import com.ifilmo.domain.Picture;
 import com.ifilmo.domain.Second_catalogue;
 import com.ifilmo.domain.Third_catalogue;
-import com.ifilmo.domain.User;
 import com.ifilmo.mapping.catalogue_tableMapping;
 import com.ifilmo.mapping.first_catalogueMapping;
 import com.ifilmo.mapping.pictureMapping;
 import com.ifilmo.mapping.second_catalogueMapping;
 import com.ifilmo.mapping.third_catalogueMapping;
-import com.ifilmo.mapping.userMapping;
 
 public class CatalogueDAOImpl implements CatalogueDAO {
 	
@@ -220,6 +218,19 @@ public class CatalogueDAOImpl implements CatalogueDAO {
 		return (rows == 1);
 	}
 	
+	public boolean deletePictures(int t_id) {
+		String sql = "DELETE FROM picture WHERE t_id = " + t_id;
+		try {
+			return (jdbctemplate.update(sql) == 1);
+		} catch (ClassNotFoundException e) {
+			System.out.println("NO DRIVER");
+		} catch (SQLException e) {
+			System.out.println("NO CONNECTION");
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public boolean updatePictures(String path, int t_id) {
 		
 		String sql = "UPDATE picture SET path = " + "'" + path + "'" + " WHERE t_id = " + t_id;
@@ -234,10 +245,44 @@ public class CatalogueDAOImpl implements CatalogueDAO {
 		return false;
 	}
 	
+	public boolean insertPictures(String path, int t_id) {
+		
+		String sql = "INSERT INTO picture(path, t_id)" + "VALUES"
+				+ "(?,?)";
+		Object[] values = new Object[] {path, t_id};
+		int rows = 0;
+		try {
+			rows = jdbctemplate.update(sql, values);
+		} catch (ClassNotFoundException e) {
+			System.out.println("NO DRIVER");
+		} catch (SQLException e) {
+			System.out.println("NO CONNECTION");
+			e.printStackTrace();
+		}
+		return (rows == 1);
+	}
+	
+	public List<Picture> findPictureById(int t_id) {
+		List<Picture> pictures = null;
+		String sql = "SELECT * FROM picture WHERE  t_id= " + t_id ;
+		System.out.println(sql);
+		try {
+			pictures  = jdbctemplate.query(sql, new pictureMapping());
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pictures;
+	}
+	
 	public Third_catalogue findThird_catalogueByName(String courseName) {
 		Third_catalogue third_catalogue = null;
 		String sql = "SELECT * FROM third_catalogue WHERE  t_name= '" + courseName + "'";
-		System.out.println(sql);
+		
 		try {
 			List<Object> entitys = jdbctemplate.query(sql, new third_catalogueMapping());
 			if(entitys.size()!=0){
@@ -270,9 +315,10 @@ public class CatalogueDAOImpl implements CatalogueDAO {
 		return picture;
 	}
 	
-	public boolean UpdateCourseContentById(String content, int t_id) {
+	public boolean UpdateCourseContentById(String t_name, String content, int t_id) {
 		//User user = null;
-		String sql = "UPDATE third_catalogue SET t_content = " + "'" + content + "'" + " WHERE t_id = " + t_id;
+		String sql = "UPDATE third_catalogue SET t_name = " + "'" + t_name + "', t_content = '" + content + "' WHERE t_id = " + t_id;
+		System.out.println(sql);
 		try {
 			return (jdbctemplate.update(sql)==1);
 		} catch (ClassNotFoundException e) {
@@ -317,4 +363,60 @@ public class CatalogueDAOImpl implements CatalogueDAO {
 			return catalogue;
 		}
 	
+	public First_catalogue findFirst_catalogueName(String courseName){
+		String sql = "SELECT * FROM first_catalogue WHERE f_name = '" + courseName + "'";
+		System.out.println(sql);
+		First_catalogue f_name = null;
+		try {
+			List<Object> entitys =  jdbctemplate.query(sql, new first_catalogueMapping());
+			if(entitys.size()!=0){
+				f_name = (First_catalogue) entitys.get(0);
+			}else{
+				System.out.println("找不到目录");
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return f_name;
+	}
+	
+	public Second_catalogue findSecond_catalogueName(String courseName){
+		String sql = "SELECT * FROM second_catalogue WHERE s_name = '" + courseName + "'";
+		System.out.println(sql);
+		Second_catalogue s_name = null;
+		try {
+			List<Object> entitys =  jdbctemplate.query(sql, new second_catalogueMapping());
+			if(entitys.size()!=0){
+				s_name = (Second_catalogue) entitys.get(0);
+			}else{
+				System.out.println("找不到目录");
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return s_name;
+	}
+	
+	public Third_catalogue findThird_catalogueName(String courseName){
+		String sql = "SELECT * FROM third_catalogue WHERE t_name = '" + courseName + "'";
+		System.out.println(sql);
+		Third_catalogue t_name = null;
+		try {
+			List<Object> entitys =  jdbctemplate.query(sql, new third_catalogueMapping());
+			if(entitys.size()!=0){
+				t_name = (Third_catalogue) entitys.get(0);
+			}else{
+				System.out.println("找不到目录");
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return t_name;
+	}
 }

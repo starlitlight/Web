@@ -25,6 +25,7 @@ public class AddUserServlet extends HttpServlet {
 		String user_password = request.getParameter("user_password");
 		String email = request.getParameter("email");
 		int role = Integer.parseInt(request.getParameter("role"));
+		System.out.println("得到数据" + user_name + user_password + email + role);
 		int gender = 0;
 		String photo = null;
 		String encrypt_password = GenerateLinkUtils.md5(user_password);

@@ -22,20 +22,25 @@ public class addCourseContentServlet extends HttpServlet {
 		
 		response.setCharacterEncoding("utf-8"); 
 		request.setCharacterEncoding("utf-8");
-		String content = request.getParameter("edit");
+		//String courseName = request.getParameter("courseName");
+		String content = request.getParameter("edit").replace("\\", "\\\\");
 		int t_id = Integer.parseInt(request.getParameter("t_id"));
+		String courseName = request.getParameter("courseName");
 		
 		String msg = "FAILED";
 		CatalogueDAO cataloguedao = new CatalogueDAOImpl();
 		
-		if(cataloguedao.UpdateCourseContentById(content, t_id)){
+		if(cataloguedao.UpdateCourseContentById(courseName, content, t_id)){
 			List<String> imgs = getImageSrc.getImageSrc(content);
+			cataloguedao.deletePictures(t_id);
 			for(String img: imgs){
 				Picture picture = new Picture(img, t_id);
-				if(cataloguedao.updatePictures(picture.getPath(), picture.getT_id())){
-					msg = "SUCCESSFUL";
+				if(cataloguedao.insertPictures(picture.getPath(), picture.getT_id())){
+					System.out.println("DELETE存储图片成功");
+				}else{
+					System.out.println("DELETE存储图片失败");
 				}
-			}
+			}			
 		}else{
 			System.out.println("无法存储课程内容");
 		}

@@ -44,3 +44,11 @@ button.btn.btn-primary.btn-lg{
 div.fr-wrapper.show-placeholder{
 	height:300px;
 }
+
+.fr-wrapper{
+	min-height: 350px;
+}
+
+.changeCourseName{
+	float: left;
+}

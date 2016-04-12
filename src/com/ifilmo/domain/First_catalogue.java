@@ -1,14 +1,14 @@
 package com.ifilmo.domain;
 
 /**
- * 一级目录目录实体类
+ * 一锟斤拷目录目录实锟斤拷锟斤拷
  */
 
 public class First_catalogue {
 	
-	int f_id;
-	//一级目录名
-	String f_name;
+	private int f_id;
+	//一锟斤拷目录锟斤拷
+	private String f_name;
 	
 	
 	public First_catalogue(int f_id, String f_name) {

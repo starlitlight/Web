@@ -37,19 +37,32 @@ public interface CatalogueDAO {
     
     //public boolean insertPictures(Picture picture);
     
+    public boolean insertPictures(String path, int t_id);
+    
     public boolean updatePictures(String path, int t_id);
+    
+    public boolean deletePictures(int t_id);
+    
+    public List<Picture> findPictureById(int t_id);
     
     public List<Picture> findPictureByTid(int t_id);
     
     public boolean insertThird_catalogue(String courseName, int s_id);
     
-    public boolean UpdateCourseContentById(String content, int t_id);
+    public boolean UpdateCourseContentById(String t_name, String content, int t_id);
     
     public boolean updateCatalogue(String content);
 
     public Catalogue_table selectCatalogue();
     
     public List<Second_catalogue> findSecond_catalogueByf_name(String f_name);
+    
+    public First_catalogue findFirst_catalogueName(String courseName);
+    
+    public Second_catalogue findSecond_catalogueName(String courseName);
+    
+    public Third_catalogue findThird_catalogueName(String courseName);
+    
     
     
 }

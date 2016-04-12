@@ -64,14 +64,9 @@
 					<form>
 <%
 		        if(pictures!=null){
-					for(int i=0; i<pictures.size(); i++){
-						Picture picture = pictures.get(0);
-						String path = picture.getPath();
-						System.out.println(path);
 %>
-            			<img src="<%=path %>" class="pull-left">
+            			<img src="<%=pictures.get(0).getPath() %>" class="pull-left">
 <%
-					}
 				}
 %>
 			            <div class="caption" class="pull-right">

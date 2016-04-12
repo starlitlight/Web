@@ -47,22 +47,24 @@
         	<form role="form" id="newCourse">
             	<div class="form-group row">
                 	<div class="col-md-12">
-						<h3>添加新课程:</h3>
+						<h3>添加新课程/目录:</h3>
 						<hr></hr>
 					</div>
 				</div>
 				<div class="form-group row">
 					<div class="col-md-2">
-						<label>课程名称：</label>
+						<label>课程名称/目录：</label>
+						
 					</div>
 					<div class="col-md-6">	
                     	<input type="text" class="form-control" id="courseName" name="courseName" placeholder="新课程名称">
                     	<div id="NewCourseName" style="color:red; visibility:hidden;">请输入新课程的名称!</div>
+                    	<div id="checkCourseName" style="color:red; visibility:hidden">课程名已存在，请重新输入!</div>
 					</div>
 				</div>
 				<div class="form-group row">
                 	<div class="col-md-12">
-						<h3>课程分类:</h3>
+						<h3>课程分类/目录:</h3>
 						<hr></hr>
 					</div>
 				</div>

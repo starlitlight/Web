@@ -80,7 +80,7 @@
 						//管理员用户
 						}else if(user.getRole()==2){
 %>
-					<li><a href="showAddCourseServlet" style="color:red; font-size:16px;">添加课程</a></li>
+					<li><a href="showAddCourseServlet" style="color:red; font-size:18px;">添加课程/目录</a></li>
 					<li><span class="fa fa-user" aria-hidden="true"></span></li>
 					<li class="dropdown user"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> <span class="login-font"><%=user.getUser_name() %></span>
@@ -99,7 +99,7 @@
 						//超级管理员
 						}else if(user.getRole()==3){
 %>
-					<li><a href="showAddCourseServlet" style="color:red; font-size:16px;">添加课程</a></li>
+					<li><a href="showAddCourseServlet" style="color:red; font-size:18px;">添加课程/目录</a></li>
 					<li><span class="fa fa-user" aria-hidden="true"></span></li>
 					<li class="dropdown user"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> <span class="username"><%=user.getUser_name() %></span>
@@ -197,27 +197,30 @@
 					<h4 class="modal-title" id="myModalLabel">添加新用户</h4>
 				</div>
 				<div class="modal-body">
-				<form action="AddUserServlet" name="AddUser" method="post">
-					<tr>
-						<input type="text" name="user_name" class="input-style"
-							placeholder="用户名" required autofocus>
-					</tr>
-					<tr>
-						<input type="password" name="user_password" class="input-style"
-							placeholder="初始密码" required>
-					</tr>
-					<tr>
-						<input type="text" name="email" class="input-style"
-							placeholder="邮箱" required>
-					</tr>
-					<tr>
-						<p class="authority">权限</p>
-						<input class="authority" type="radio" name="role" value="1"
-							checked /> 只读
-					</tr>
+					<form name="AddUser">
+						<tr>
+							<input type="text" id="user_nameManager" class="input-style"
+								placeholder="用户名">
+						</tr>
+						<tr>
+							<input type="password" id="user_passwordManager" class="input-style"
+								placeholder="初始密码">
+						</tr>
+						<tr>
+							<input type="text" id="emailManager" class="input-style"
+								placeholder="邮箱">
+						</tr>
+						<tr>
+							<div id="checkUserNameEmailManager" style="color:red; visibility:hidden">用户名或者邮箱已存在，请重新输入!</div>
+						</tr>
+						<tr>
+							<p class="authority">权限</p>
+							<input class="authority" type="radio" name="role" value="1"
+								checked /> 只读
+						</tr>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-lg btn-primary btn-block" type="submit">添加用户</button>
+					<button class="btn btn-lg btn-primary btn-block" type="button" onclick="addNewUser()">添加用户</button>
 				</div>
 			</div>
 		</div>
@@ -226,7 +229,7 @@
 </div>
 <!-- 关闭模态框 -->
 
-<!-- 模态框 添加新用户2 -->
+<!-- 模态框 添加新用户Admin-->
 <div class="modal fade" id="addUser2" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	style="display: none;" data-backdrop="static" data-keyboard="ture">
@@ -238,33 +241,134 @@
 					<h4 class="modal-title" id="myModalLabel">添加新用户</h4>
 				</div>
 				<div class="modal-body">
-				<form action="AddUserServlet" name="AddUser" method="post">
+				<form name="AddUserAdmin">
 					<tr>
-						<input type="text" name="user_name" class="input-style"
-							placeholder="用户名" required autofocus>
+						<input type="text" id="user_nameAdmin" class="input-style"
+							placeholder="用户名" required="" autofocus>
 					</tr>
 					<tr>
-						<input type="password" name="user_password" class="input-style"
-							placeholder="初始密码" required>
+						<input type="password" id="user_passwordAdmin" class="input-style"
+							placeholder="初始密码">
 					</tr>
 					<tr>
-						<input type="text" name="email" class="input-style"
-							placeholder="邮箱" required>
+						<input type="text" id="emailAdmin" class="input-style"
+							placeholder="邮箱">
+					</tr>
+					<tr>
+						<div id="checkUserNameEmail" style="color:red; visibility:hidden">用户名或者邮箱已存在，请重新输入!</div>
 					</tr>
 					<tr>
 						<p class="authority">权限</p>
 						<input class="authority" type="radio" name="role" value="1" /> 只读
 						<input class="authority" type="radio" name="role" value="2" /> 编辑
+						
 					</tr>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-lg btn-primary btn-block" type="submit">添加用户</button>
+					<button class="btn btn-lg btn-primary btn-block" type="button" onclick="addNewUserAdmin()" >添加用户</button>
 				</div>
 			</div>
+			
 			<!-- /.modal-content -->
 		</div>
 	</form>
 	<!-- /.modal-dialog -->
 </div>
 <!-- 关闭模态框 -->
+
+<script type="text/javascript">
+function addNewUserAdmin(){
+	
+	var userName = $('#user_nameAdmin').val();
+	var password = $('#user_passwordAdmin').val();
+	var email = $('#emailAdmin').val();
+	var role = AddUserAdmin.role.value;
+	
+	if(userName == "" || password==""){
+		alert("用户名密码不能为空，请重新输入！");
+		return false;
+	}else if(email == ""){
+		alert("邮箱不能为空，请重新输入！");
+		return false;
+	}else if(role == ""){
+		alert("权限不能为空，请重新输入！");
+		return false;
+	}else{
+	var userInfo={"user_name": userName, "email": email};
+	$.ajax({
+		type: "post",
+		url: "CheckUserServlet",
+		data: userInfo,
+		dataType: "json",
+		success: function(data){
+			var msg = data.message;
+			if(msg=="successful"){
+				var checkUserNameEmail = document.getElementById("checkUserNameEmail");
+				checkUserNameEmail.style.visibility = "visible";
+				
+			}else{
+				alert("可以添加");
+				var checkUserNameEmail = document.getElementById("checkUserNameEmail");
+				checkUserNameEmail.style.visibility = "hidden";
+				alert("判断成功");
+				document.AddUserAdmin.method = "post";
+				document.AddUserAdmin.action = "AddUserServlet?user_name=" + userName + " &user_password=" + password
+						+" &email=" + email + " &role="  + role;
+				document.AddUserAdmin.submit();
+			}
+		},
+		error: function(err){
+			alert("登陆失败");
+		}
+	});
+	}
+}
+
+function addNewUser(){
+	
+	var userName = $('#user_nameManager').val();
+	var password = $('#user_passwordManager').val();
+	var email = $('#emailManager').val();
+	var role = AddUser.role.value;
+	
+	if(userName == "" || password==""){
+		alert("用户名密码不能为空，请重新输入！");
+		return false;
+	}else if(email == ""){
+		alert("邮箱不能为空，请重新输入！");
+		return false;
+	}else if(role == ""){
+		alert("权限不能为空，请重新输入！");
+		return false;
+	}else{
+	var userInfo={"user_name": userName, "email": email};
+	$.ajax({
+		type: "post",
+		url: "CheckUserServlet",
+		data: userInfo,
+		dataType: "json",
+		success: function(data){
+			var msg = data.message;
+			if(msg=="successful"){
+				var checkUserNameEmailManager = document.getElementById("checkUserNameEmailManager");
+				checkUserNameEmailManager.style.visibility = "visible";
+				
+			}else{
+				alert("可以添加");
+				var checkUserNameEmailManager = document.getElementById("checkUserNameEmailManager");
+				checkUserNameEmailManager.style.visibility = "hidden";
+				alert("判断成功");
+				document.AddUser.method = "post";
+				document.AddUser.action = "AddUserServlet?user_name=" + userName + " &user_password=" + password
+						+" &email=" + email + " &role="  + role;
+				document.AddUser.submit();
+			}
+		},
+		error: function(err){
+			alert("登陆失败");
+		}
+	});
+	}
+}
+</script>
 </html>

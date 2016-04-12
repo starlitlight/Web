@@ -6,9 +6,9 @@ package com.ifilmo.domain;
 
 public class Picture {
 	
-	int id;
-	String path;
-	int t_id;
+	private int id;
+	private String path;
+	private int t_id;
 	
 	
 	public Picture(int id, String path, int t_id) {

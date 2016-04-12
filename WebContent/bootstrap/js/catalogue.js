@@ -71,82 +71,103 @@ function insertCourse() {
 	var insertCourse={"courseName": courseName, "selectCourse1": selectCourse1, "selectCourse2": selectCourse2};
 	alert("courseName: " + courseName + "course1 value: " + selectCourse1 + " and course2 value: " + selectCourse2);
 	
-	if(selectCourse1==0 && selectCourse2==0){
-		var htmlCode1 = "<li class='ui-sortable-handle'>"
-            + "<a href='#" + courseName + "' data-toggle='collapse'>" + courseName + "</a>" 
-            +"<a href='#' onclick='deleteCourse1(event)'>"  //deleteCourse1
-            +"<i name='deleteIcon' class='fa fa-times' id='Icon1" + courseName + "' style='visibility: hidden;'></i>"// id=Icon1
-            +"</a>"
-            +"<ul id='" + courseName + "' class='collapse'>"
-            +"<div id='sortable2" + courseName + "' class='menu-second'>"
-            +"</div>"
-            +"</ul>"
-            +"</li>";
-        $("#sortable1").append(htmlCode1);
-        alert("添加一级目录成功");
-        $.ajax({
-			type: "post",
-			url: "addCourseServlet",
-			data: insertCourse,
-			dataType: "json",
-			success: function(data){
-			},
-			error: function(err){
+	var checkCourseName = {"courseName": courseName};
+	$.ajax({
+		type: "post",
+		url: "CheckCourseNameServlet",
+		data: checkCourseName,
+		dataType: "json",
+		success: function(data){
+			if(data.message=="successful"){
+				var checkCourseName = document.getElementById("checkCourseName");
+				checkCourseName.style.visibility = "hidden";
+				alert("课程名可用");
+				if(selectCourse1==0 && selectCourse2==0){
+					var htmlCode1 = "<li class='ui-sortable-handle'>"
+			            + "<a href='#" + courseName + "' data-toggle='collapse'>" + courseName + "</a>" 
+			            +"<a href='#' onclick='deleteCourse1(event)'>"  //deleteCourse1
+			            +"<i name='deleteIcon' class='fa fa-times' id='Icon1" + courseName + "' style='visibility: hidden;'></i>"// id=Icon1
+			            +"</a>"
+			            +"<ul id='" + courseName + "' class='collapse'>"
+			            +"<div id='sortable2" + courseName + "' class='menu-second'>"
+			            +"</div>"
+			            +"</ul>"
+			            +"</li>";
+					$("#sortable1").append(htmlCode1);
+				    alert("添加一级目录成功");
+				    $.ajax({
+						type: "post",
+						url: "addCourseServlet",
+						data: insertCourse,
+						dataType: "json",
+						success: function(data){
+						},
+						error: function(err){
+						}
+					});
+					saveTable();
+				}
+				if(selectCourse1!=0 && selectCourse2==0){
+					var htmlCode2 = "<li class='ui-sortable-handle'>"
+						+ "<a href='#" + courseName + "' data-toggle='collapse'>" + courseName + "</a>" 
+						+"<a href='#' onclick='deleteCourse2(event)'>"  //deleteCourse2
+						+"<i name='deleteIcon' class='fa fa-times' id='Icon2" + courseName + "' style='visibility: hidden;'></i>"// id=Icon2
+						+"</a>"
+						+"<ul id='" + courseName + "' class='collapse'>"
+						+"<div id='sortable3" + courseName + "' class='menu-third ui-sortable'>"// id=sotable3
+						+"</div>"
+				        +"</ul>"
+				        +"</li>";
+					var courseLayer2 = "#sortable2" + selectCourse1Name;
+					alert(courseLayer2);
+					$(courseLayer2).append(htmlCode2);
+					alert("添加二级目录成功");
+					
+					$.ajax({
+						type: "post",
+						url: "addCourseServlet",
+						data: insertCourse,
+						dataType: "json",
+						success: function(data){
+						},
+						error: function(err){
+						}
+					});
+					saveTable();
+				}
+				if(selectCourse1!=0 && selectCourse2!=0){
+					var htmlCode3 = "<li class='ui-sortable-handle'>"
+						+ "<a href='ShowCourseServlet?t_name=" + courseName + "'>" +  courseName + "</a>" 
+						+"<a href='#' onclick='deleteCourse3(event)'>" //deleteCourse3
+						+"<i name='deleteIcon' class='fa fa-times' id='Icon3" + courseName + "' style='visibility: hidden;'></i>"// id=Icon3
+						+"</a>"
+						+"</li>";
+					var courseLayer3 = "#sortable3" + selectCourse2Name;
+					alert(courseLayer3);
+					$(courseLayer3).append(htmlCode3);
+					alert("添加三级目录成功");
+					$.ajax({
+						type: "post",
+						url: "addCourseServlet",
+						data: insertCourse,
+						dataType: "json",
+						success: function(data){
+						},
+						error: function(err){
+						}
+					});
+					saveTable();
+				}
+			}else{
+				var checkCourseName = document.getElementById("checkCourseName");
+				checkCourseName.style.visibility = "visible";
 			}
-		});
-        saveTable();
-	}
-	if(selectCourse1!=0 && selectCourse2==0){
-		var htmlCode2 = "<li class='ui-sortable-handle'>"
-			+ "<a href='#" + courseName + "' data-toggle='collapse'>" + courseName + "</a>" 
-			+"<a href='#' onclick='deleteCourse2(event)'>"  //deleteCourse2
-			+"<i name='deleteIcon' class='fa fa-times' id='Icon2" + courseName + "' style='visibility: hidden;'></i>"// id=Icon2
-			+"</a>"
-			+"<ul id='" + courseName + "' class='collapse'>"
-			+"<div id='sortable3" + courseName + "' class='menu-third ui-sortable'>"// id=sotable3
-			+"</div>"
-	        +"</ul>"
-	        +"</li>";
-		var courseLayer2 = "#sortable2" + selectCourse1Name;
-		alert(courseLayer2);
-		$(courseLayer2).append(htmlCode2);
-		alert("添加二级目录成功");
+		},
 		
-		$.ajax({
-			type: "post",
-			url: "addCourseServlet",
-			data: insertCourse,
-			dataType: "json",
-			success: function(data){
-			},
-			error: function(err){
-			}
-		});
-		saveTable();
-	}
-	if(selectCourse1!=0 && selectCourse2!=0){
-		var htmlCode3 = "<li class='ui-sortable-handle'>"
-			+ "<a href='ShowCourseServlet?t_name=" + courseName + "'>" +  courseName + "</a>" 
-			+"<a href='#' onclick='deleteCourse3(event)'>" //deleteCourse3
-			+"<i name='deleteIcon' class='fa fa-times' id='Icon3" + courseName + "' style='visibility: hidden;'></i>"// id=Icon3
-			+"</a>"
-			+"</li>";
-		var courseLayer3 = "#sortable3" + selectCourse2Name;
-		alert(courseLayer3);
-		$(courseLayer3).append(htmlCode3);
-		alert("添加三级目录成功");
-		$.ajax({
-			type: "post",
-			url: "addCourseServlet",
-			data: insertCourse,
-			dataType: "json",
-			success: function(data){
-			},
-			error: function(err){
-			}
-		});
-		saveTable();
-	}
+		error: function(err){
+			alert("添加课程失败");
+		}
+	});
 }
 
 function visibleDeleteIcon(){
