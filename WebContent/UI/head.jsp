@@ -15,8 +15,7 @@
 <head>
 
 <title>爱影</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="icon" type='image/png' href="<%=request.getContextPath() %>/bootstrap/images/logoOrange.png">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/bootstrap/css/font-awesome.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/bootstrap/css/head.css" rel="stylesheet">
@@ -43,6 +42,20 @@
 	                 <li><a class="login-font">全部课程</a></li>
                 </ul>
 				<ul class="nav navbar-nav">
+<% 
+					if(user==null){
+%>
+					<form class="navbar-form navbar-left" role="search" name="search">
+	                    <div class="form-group">
+	                        <input type="text" name="keyword" style="width:300px" class="form-control" placeholder="搜索你感兴趣的课程">
+	                        <a href="#" class="navbar-link">
+	                        	<span class="fa fa-search fa-lg" aria-hidden="true"></span>
+	                        </a>
+	                    </div>
+	                </form>
+<% 
+					}else{
+%>
 	                <form class="navbar-form navbar-left" role="search" name="search" action="searchCourseServlet" method="post">
 	                    <div class="form-group">
 	                        <input type="text" name="keyword" style="width:300px" class="form-control" placeholder="搜索你感兴趣的课程">
@@ -51,6 +64,9 @@
 	                        </a>
 	                    </div>
 	                </form>
+<% 
+					}
+%>
 				</ul>
 			</div>
 			<div class="col-md-3">

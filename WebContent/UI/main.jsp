@@ -9,8 +9,9 @@
 <head>
 <title>爱影</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" type="image/x-icon" href="<%=request.getContextPath() %>/bootstrap/images/logo_main.ico"/>
+<link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath() %>/bootstrap/images/logo_main.ico" />
 <link href="<%=request.getContextPath() %>/bootstrap/css/login.css" rel="stylesheet">
-
 </head>
 <!-- END HEAD -->
 
@@ -27,10 +28,9 @@
 							required="" class="form-control input-lg" autofocus="" /> 
 						<input type="password" id="user_passwordLogin" placeholder="密码" oninvalid="this.setCustomValidity('请输入密码')"
 							required="" class="form-control input-lg" /> 
-						<div id="checkLogin" style="color:red; visibility:hidden;">用户名密码密码不正确!请重新输入</div>
+						<div id="checkLogin" style="color:red; visibility:hidden;">用户名密码密码不正确, 请重新输入!</div>
 						<a data-toggle="modal" data-target="#findPassword" class="primary" style="font-size: 14px">忘记密码</a>
 						<button onclick="userLogin()" type="button" class="btn btn-lg btn-block btn-primary">登陆</button>
-						
 					</form>
 				</section>
 			</div>
@@ -42,7 +42,6 @@ function userLogin(){
 	
 	var userName = $('#user_nameLogin').val();
 	var password = $('#user_passwordLogin').val();
-	alert(userName + password);
 	if(userName =="" || password == ""){
 		alert("用户名密码不能为空，请重新输入！");
 		return false;

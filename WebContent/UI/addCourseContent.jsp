@@ -15,6 +15,8 @@
 <title>爱影</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link rel="icon" type="image/x-icon" href="<%=request.getContextPath() %>/bootstrap/images/logo_main.ico"/>
+<link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath() %>/bootstrap/images/logo_main.ico" />
 <link href="bootstrap/css/new_course.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/wangEditor/dist/css/wangEditor.min.css">
 <script src="<%=request.getContextPath()%>/wangEditor/dist/js/lib/jquery-1.10.2.min.js"></script>

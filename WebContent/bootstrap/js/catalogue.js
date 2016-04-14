@@ -69,7 +69,6 @@ function insertCourse() {
 	var selectCourse2 = $("#selectCourse2").val();
 	var selectCourse2Name = $("#selectCourse2").find("option:selected").text();
 	var insertCourse={"courseName": courseName, "selectCourse1": selectCourse1, "selectCourse2": selectCourse2};
-	alert("courseName: " + courseName + "course1 value: " + selectCourse1 + " and course2 value: " + selectCourse2);
 	
 	var checkCourseName = {"courseName": courseName};
 	$.ajax({
@@ -119,7 +118,6 @@ function insertCourse() {
 				        +"</ul>"
 				        +"</li>";
 					var courseLayer2 = "#sortable2" + selectCourse1Name;
-					alert(courseLayer2);
 					$(courseLayer2).append(htmlCode2);
 					alert("添加二级目录成功");
 					
@@ -143,7 +141,6 @@ function insertCourse() {
 						+"</a>"
 						+"</li>";
 					var courseLayer3 = "#sortable3" + selectCourse2Name;
-					alert(courseLayer3);
 					$(courseLayer3).append(htmlCode3);
 					alert("添加三级目录成功");
 					$.ajax({
@@ -171,7 +168,7 @@ function insertCourse() {
 }
 
 function visibleDeleteIcon(){
-	alert("请删除目录功能");
+	alert("请删除选择的目录");
 	var iconValue = document.getElementsByName("deleteIcon");
 	for(var i=0; i<iconValue.length;i++)
     {
@@ -182,11 +179,9 @@ function visibleDeleteIcon(){
 function deleteCourse1(event){
 	if (delete_confirm()){
 	    var deleteIconId = $(event.target).attr('id'); // 获取id
-	    alert(deleteIconId);
 	    $("#" + deleteIconId).parent().parent().remove(); //删除HTML中的课程
 	    
 	    var deleteCourseId = deleteIconId.replace(/Icon1/, ""); //去掉前缀Icon1
-	    alert(deleteCourseId);
 	    
 		alert("删除一级目录课程成功");
 		var iconValue = document.getElementsByName("deleteIcon");
@@ -214,11 +209,10 @@ function deleteCourse1(event){
 function deleteCourse2(event){
 	if (delete_confirm()){
 	    var deleteIconId = $(event.target).attr('id'); // 获取id
-	    alert(deleteIconId);
+	    
 	    $("#" + deleteIconId).parent().parent().remove();//删除HTML中的课程
 	    
 	    var deleteCourseId = deleteIconId.replace(/Icon2/, ""); //去掉前缀Icon2
-	    alert(deleteCourseId);
 	    
 	    alert("删除二级目录课程成功");
 		var iconValue = document.getElementsByName("deleteIcon");
@@ -245,11 +239,8 @@ function deleteCourse2(event){
 function deleteCourse3(event){
 	if (delete_confirm()){
 	    var deleteIconId = $(event.target).attr('id'); // 获取id
-	    alert(deleteIconId);
 	    $("#" + deleteIconId).parent().parent().remove(); //删除HTML中的课程
-	    
 	    var deleteCourseId = deleteIconId.replace(/Icon3/, ""); //去掉前缀Icon3
-	    alert(deleteCourseId);
 	    
 	    alert("删除三级目录课程成功");
 		var iconValue = document.getElementsByName("deleteIcon");
@@ -274,9 +265,7 @@ function deleteCourse3(event){
 }
 
 function showCourse(){
-	alert("进入showCourse");
 	var name = $(event.target).html(); // 课程名称
-	alert(name);
 	var courseName = {"courseName": name};
 	//var upperName = $(event.target).parent().parent().attr("id").replace(/sortable3/,"");
 	//alert(upperName);

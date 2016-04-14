@@ -11,17 +11,6 @@
 
 	<servlet>
 		<display-name>显示主页面</display-name>
-		<servlet-name>sortableServlet</servlet-name>
-		<servlet-class>com.ifilmo.servlet.catalogue.sortableServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>sortableServlet</servlet-name>
-		<url-pattern>/sortableServlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<display-name>显示主页面</display-name>
 		<servlet-name>MainServlet</servlet-name>
 		<servlet-class>com.ifilmo.servlet.MainServlet</servlet-class>
 	</servlet>
@@ -40,28 +29,6 @@
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
 		<url-pattern>/LoginServlet</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<display-name>查看用户登录是否成功</display-name>
-		<servlet-name>CheckLoginServlet</servlet-name>
-		<servlet-class>com.ifilmo.servlet.CheckLoginServlet</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>CheckUserServlet</servlet-name>
-		<url-pattern>/CheckUserServlet</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<display-name>查看添加用户是否重名，重邮箱</display-name>
-		<servlet-name>CheckUserServlet</servlet-name>
-		<servlet-class>com.ifilmo.servlet.CheckUserServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>CheckLoginServlet</servlet-name>
-		<url-pattern>/CheckLoginServlet</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -198,16 +165,7 @@
 		<url-pattern>/FileUploadServlet</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<display-name>保存上传图片</display-name>
-		<servlet-name>SavePictureServlet</servlet-name>
-		<servlet-class>com.ifilmo.servlet.catalogue.SavePictureServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>SavePictureServlet</servlet-name>
-		<url-pattern>/SavePictureServlet</url-pattern>
-	</servlet-mapping>
+	
 
 	<servlet>
 		<display-name>二级菜单</display-name>
@@ -380,7 +338,7 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<display-name>Check课程名字</display-name>
+		<display-name>检查课程名字</display-name>
 		<servlet-name>CheckCourseNameServlet</servlet-name>
 		<servlet-class>com.ifilmo.servlet.catalogue.CheckCourseNameServlet</servlet-class>
 	</servlet>
@@ -391,4 +349,47 @@
 	</servlet-mapping>
 
 
+	<servlet>
+		<display-name>查看用户登录是否成功</display-name>
+		<servlet-name>CheckLoginServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.CheckLoginServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CheckLoginServlet</servlet-name>
+		<url-pattern>/CheckLoginServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>目录拖拽</display-name>
+		<servlet-name>sortableServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.catalogue.sortableServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>sortableServlet</servlet-name>
+		<url-pattern>/sortableServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>查看添加用户是否重名，重邮箱</display-name>
+		<servlet-name>CheckUserServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.CheckUserServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CheckUserServlet</servlet-name>
+		<url-pattern>/CheckUserServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>保存上传图片</display-name>
+		<servlet-name>SavePictureServlet</servlet-name>
+		<servlet-class>com.ifilmo.servlet.catalogue.SavePictureServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SavePictureServlet</servlet-name>
+		<url-pattern>/SavePictureServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

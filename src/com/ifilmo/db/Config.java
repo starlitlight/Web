@@ -7,6 +7,7 @@ public interface Config {
 	//public static final String PWD    = "Lfm890918";
 	public static final String URL    = "jdbc:mysql://localhost/ifilmo_project?characterEncoding=UTF-8&autoReconnect=true";
 	public static final String UNAME  = "root";
-	public static final String PWD    = "admin";
+	public static final String PWD    = "";
+	//public static final String PWD    = "admin";
 
 }

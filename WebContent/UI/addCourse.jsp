@@ -14,6 +14,8 @@
 <head>
 <title>爱影</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" type="image/x-icon" href="<%=request.getContextPath() %>/bootstrap/images/logo_main.ico"/>
+<link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath() %>/bootstrap/images/logo_main.ico" />
 <link href="bootstrap/css/new_course.css" rel="stylesheet">
 <script src="<%=request.getContextPath() %>/bootstrap/js/select.js"></script>
 </head>
